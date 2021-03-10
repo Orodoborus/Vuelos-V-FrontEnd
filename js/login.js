@@ -34,7 +34,7 @@
             body:JSON.stringify({
                 Username:regis.value,
                 Password:regispass1.value,
-                Rol:"Admin"
+                Rol:"User"
             })
         }).then(response => response.text().then(function(text) {
             return text ? JSON.parse(text) : {}
