@@ -33,12 +33,14 @@
             },
             body:JSON.stringify({
                 Username:regis.value,
-                Password:regispass1.value
+                Password:regispass1.value,
+                Rol:"Admin"
             })
         }).then(response => response.text().then(function(text) {
             return text ? JSON.parse(text) : {}
           }))
-        console.log(fetch('http://localhost:50498/api/Usuario'));
+          //.then(response => response.json())
+
         new_users.push(new_user);
         console.log(new_users);
         console.log(regis.value);
