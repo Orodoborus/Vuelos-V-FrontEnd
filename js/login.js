@@ -8,6 +8,9 @@
     let regispass2= {};
     let btnregis = {};
     let new_users = [];
+    let user_exists = [];
+    let userNav = [];
+    let userNavlist = [];
 
     const ini = function(){
         login = document.getElementById('login');
@@ -21,12 +24,50 @@
         btnregis.onclick = registrationProcess;
     }
 
-    const loginProcess = function(){
-        
+    const loginProcess = async function(){
+       /* userNav = document.getElementById('userNav');
+        userNav.innerHTML='';*/
+        if(login.value == "" || loginpass.value == ""){
+            alert('Favor llenar todos los campos requeridos');
+        }else{
+            user_exists =  await fetch('http://localhost:50498/api/Usuario').then(response => response.json());
+            var length =  Object.keys(user_exists).length;
+            console.log(length);
+            var cont = 0;
+            for (let index = 0; index < length; index++) {
+                user_exists =  await fetch('http://localhost:50498/api/Usuario/'+index).then(response => response.json());
+                if(login.value == user_exists.Username && loginpass.value == user_exists.Password){
+                    cont = 1;
+                    userNavlist = await fetch('http://localhost:50498/api/Usuario/'+index).then(response => response.json());
+                   // window.location.replace("http://192.168.56.1:5500/index.html");
+                   console.log(userNavlist);
+                }
+            }
+            if(cont == 1){
+                /*const info = userNavlist.split(',');
+                const navItems = info.map(e=>{
+                    return `<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">Seguridad</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">Administracion</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#team">Consultas</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/html/login.html">${e.Username}</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/html/login.html">LogOut</a></li>`
+                })
+
+                userNav.innerHTML =navItems; */
+                alert('signed in');
+            }else{
+                alert('Su cuenta no esta registrada, por favor dirijase al registro.');
+            }
+        }
     }
 
     const registrationProcess = async function(){
-        var new_user = await fetch('http://localhost:50498/api/Usuario',{
+        if(regis.value == "" || regispass1.value == "" || regispass2.value == ""){
+            alert('Favor llenar todos los campos requeridos');
+        }else{
+            if(regispass1.value == regispass2.value){
+                var new_user = await fetch('http://localhost:50498/api/Usuario',{
             method:'POST',
             headers:{
                 'Content-Type':'application/json'
@@ -45,6 +86,11 @@
         console.log(new_users);
         console.log(regis.value);
         console.log(regispass1.value);
+            }else{
+                alert('Las contraseñas no son iguales, favor revisar.');
+            }
+        }
+        
     }
 
     ini();
