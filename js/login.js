@@ -25,8 +25,8 @@
     }
 
     const loginProcess = async function(){
-       /* userNav = document.getElementById('userNav');
-        userNav.innerHTML='';*/
+        userNav = document.getElementById('userNav');
+        userNav.innerHTML='';
         if(login.value == "" || loginpass.value == ""){
             alert('Favor llenar todos los campos requeridos');
         }else{
@@ -39,23 +39,24 @@
                 if(login.value == user_exists.Username && loginpass.value == user_exists.Password){
                     cont = 1;
                     userNavlist = await fetch('http://localhost:50498/api/Usuario/'+index).then(response => response.json());
-                   // window.location.replace("http://192.168.56.1:5500/index.html");
                    console.log(userNavlist);
                 }
             }
             if(cont == 1){
-                /*const info = userNavlist.split(',');
-                const navItems = info.map(e=>{
-                    return `<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">Seguridad</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">Administracion</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#team">Consultas</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/html/login.html">${e.Username}</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/html/login.html">LogOut</a></li>`
-                })
-
-                userNav.innerHTML =navItems; */
-                alert('signed in');
+                if(userNavlist.Rol == "User"){
+                    alert('signed in');
+                userNav.innerHTML = `<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">Seguridad</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">Administracion</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#team">Consultas</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="html/login.html" value="${userNavlist.Username}">${userNavlist.Username}</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.html">LogOut</a></li>`;
+                }else{
+                    if(userNavlist.Rol == "Admin"){
+                        window.location.replace('https://www.youtube.com/');
+                    }
+                }
+                
             }else{
                 alert('Su cuenta no esta registrada, por favor dirijase al registro.');
             }
