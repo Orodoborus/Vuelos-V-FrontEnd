@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Crear Usuario</title>
+
+   
+
+<script src="../js/script.js"></script>
+<link rel="stylesheet" href="../css/style2.css">
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" 
+rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+
+</head>
+<body>
+    <div id="mySidebar" class="sidebar" >
+        <h3 style="color: #f1f1f1; padding-left: 15%;" >    V-Vuelos Back End </h3>
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="default.html"><img src="../Img/home.png" width="25" height="25">      Inicio</a>
+<hr>
+        <a href="#security"><img src="../Img/lock.png" width="25" height="25">      Seguridad</a>
+            
+                <a href="createuser.html"><img src="../Img/checkmark.png" width="25" height="25">      Crear Usuarios</a>
+                <a href="#security"><img src="../Img/checkmark.png" width="25" height="25">      Ver Usuarios</a>
+                <a href="changepass.html"><img src="../Img/checkmark.png" width="25" height="25">  Cambiar Contrasena</a>
+    
+<hr>
+
+        <a href="#admin"><img src="../Img/admin.png" width="25" height="25">     Administracion</a>
+                <a href="#security"><img src="../Img/checkmark.png" width="20" height="20">      Consecutivos</a>
+                <a href="#security"><img src="../Img/checkmark.png" width="25" height="25">      Paises</a>
+                <a href="#security"><img src="../Img/checkmark.png" width="25" height="25">      Aerolineas</a>
+                <a href="#security"><img src="../Img/checkmark.png" width="25" height="25">      Puertas del Aeropuerto</a>
+<hr>
+        <a href="#search"><img src="../Img/search.png" width="25" height="25">     Consultas</a>
+                <a href="#security"><img src="../Img/checkmark.png" width="20" height="20">      Bitacora</a>
+                <a href="#security"><img src="../Img/checkmark.png" width="25" height="25">      Errores</a>
+                <a href="#security"><img src="../Img/checkmark.png" width="25" height="25">      Aerolineas por pais</a>
+                <a href="#security"><img src="../Img/checkmark.png" width="25" height="25">      Puertas activas</a>
+      </div>
+      
+      <div id="main">
+        <button class="openbtn" onclick="openNav()">&#9776; Desplegar Opciones</button>
+        <!-- Display User Logged Puede ser arriba a la derecha. -->
+        <center>
+                <h2>Usuarios</h2>
+                <hr>
+                <h3>Crear nueva cuenta de usuario</h3>
+                <br>
+        </center>
+      
+
+        <form>
+                <div class="row">
+                
+                    <input type="text" class="form-control" placeholder="Usuario">
+                  
+                  <p></p>
+
+                  
+                <div class="row">
+                        <div class="col">
+                          <input type="password" class="form-control" placeholder="Contrasena"> <!-- Check Match -->
+                          
+                        </div>
+      
+                        <div class="col">
+                              <input type="password" class="form-control" placeholder="Confirmar Contrasena"> <!-- Check Match -->
+      
+                        </div>
+                        <p></p>
+
+                        <div class="row">                                
+                                  <input type="email" class="form-control" placeholder="email">                               
+                        </div>
+                </div>
+                        <p></p>
+
+                        <div class="form-group row">
+                                <div class="col">
+                                        <label for="inputState">Pregunta de Seguridad</label>
+                                        <select id="inputState" class="form-control">
+                                                <option selected>Seleccione una de las opciones...</option>
+                                                <option>Nombre de su primera mascota</option>
+                                                <option>Sobrenombre de su Abuelo</option>
+                                                <option>Comida Favorita</option>
+                                              </select>
+                                </div>
+
+                                <div class="col">
+                                        <label for="inputState">Unicamente sera utilizado en caso que olvide la constrasena</label>
+                                        <input type="text" class="form-control" placeholder="Respuesta">
+                                        
+                                </div>                              
+
+                        </div>
+          
+                  
+                </div>
+                <br>
+                <div class="row">   
+                        <hr>                             
+                        <button type="submit" class="openbtn">Crear Cuenta</button>                           
+              </div>
+                
+ 
+              </form>
+
+
+              <footer class="my-5 pt-5 text-muted text-center text-small">
+                <p class="mb-1">&copy; 2021 ULACIT</p>
+                <ul class="list-inline">
+                  <li class="list-inline-item"><a href="#">Github</a></li>
+                  <li class="list-inline-item"><a href="#">placeholder</a></li>
+                  <li class="list-inline-item"><a href="#">placeholder</a></li>
+                </ul>
+              </footer>
+                
+        </div>
+        
+
+
+    </body>
+</html>
