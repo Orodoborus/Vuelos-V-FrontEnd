@@ -57,7 +57,6 @@
                         alert('Bienvenido Admin B)');
                     }
                 }
-                
             }else{
                 alert('Su cuenta no esta registrada, por favor dirijase al registro.');
             }
