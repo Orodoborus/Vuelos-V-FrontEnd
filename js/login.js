@@ -7,6 +7,9 @@
     let regispass1= {};
     let regispass2= {};
     let btnregis = {};
+    let email = {};
+    let question = {};
+    let answer = {};
     let new_users = [];
     let user_exists = [];
     let userNav = [];
@@ -20,6 +23,9 @@
         regispass1 = document.getElementById('regispass1');
         regispass2 = document.getElementById('regispass2');
         btnregis = document.getElementById('btnregis');
+        email = document.getElementById('email');
+        question = document.getElementById('question');
+        answer = document.getElementById('answer');
         btnlogin.onclick = loginProcess;
         btnregis.onclick = registrationProcess;
     }
@@ -64,7 +70,7 @@
     }
 
     const registrationProcess = async function(){
-        if(regis.value == "" || regispass1.value == "" || regispass2.value == ""){
+        if(regis.value == "" || regispass1.value == "" || regispass2.value == "" || email.value == "" || question.value == "Seleccione una de las opciones..." || answer.value == ""){
             alert('Favor llenar todos los campos requeridos');
         }else{
             if(regispass1.value == regispass2.value){
@@ -76,22 +82,34 @@
             body:JSON.stringify({
                 Username:regis.value,
                 Password:regispass1.value,
-                Rol:"User"
+                Rol:"User",
+                Email:email.value,
+                Question:question.value,
+                Answer:answer.value
             })
         }).then(response => response.text().then(function(text) {
             return text ? JSON.parse(text) : {}
           }))
           //.then(response => response.json())
-
-        new_users.push(new_user);
+          cleanReg();
+       /* new_users.push(new_user);
         console.log(new_users);
         console.log(regis.value);
-        console.log(regispass1.value);
+        console.log(regispass1.value);*/
             }else{
                 alert('Las contraseñas no son iguales, favor revisar.');
             }
         }
         
+    }
+
+    const cleanReg = function(){
+        regis.value = '';
+        regispass1.value= '';
+        regispass2.value= '';
+        email.value= '';
+        question.value= '';
+        answer.value= '';
     }
 
     ini();

@@ -54,12 +54,12 @@ rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0s
                  
                 <div class="row">
                         <div class="col">
-                          <input type="text" class="form-control" placeholder="Usuario" disabled> <!-- Current User Only -->
+                          <input type="text" class="form-control" placeholder="Usuario" id="user"> <!-- Current User Only -->
                           
                         </div>
       
                         <div class="col">
-                              <input type="password" class="form-control" placeholder="Contrasena Actual"> <!-- Check Match -->
+                              <input type="password" class="form-control" placeholder="Contrasena Actual" id="passAct"> <!-- Check Match -->
       
                         </div>                        
                         <p></p>
@@ -67,14 +67,33 @@ rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0s
                 <div class="row">
 
                     <div class="col">
-                        <input type="password" class="form-control" placeholder="Nueva Contrasena"> <!-- Check Match -->
+                        <input type="password" class="form-control" placeholder="Nueva Contrasena" id="passNew"> <!-- Check Match -->
                         
                       </div>
     
                       <div class="col">
-                            <input type="password" class="form-control" placeholder="Verificar Nueva Contrasena"> <!-- Check Match -->
+                            <input type="password" class="form-control" placeholder="Verificar Nueva Contrasena" id="passNew2"> <!-- Check Match -->
     
                       </div>  
+                      <p></p>
+                      <div class="form-group row">
+                        <div class="col">
+                                <label for="question">Pregunta de Seguridad</label>
+                                <select id="question" class="form-control">
+                                        <option selected>Seleccione una de las opciones...</option>
+                                        <option value="1">Nombre de su primera mascota</option>
+                                        <option value="2">Sobrenombre de su Abuelo</option>
+                                        <option value="3">Comida Favorita</option>
+                                </select>
+                        </div>
+
+                        <div class="col">
+                                <label for="inputState">Respuesta de seguridad</label>
+                                <input type="text" class="form-control" placeholder="Respuesta" id="answer">
+                                
+                        </div>                              
+
+                </div>
 
 
 
@@ -89,7 +108,7 @@ rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0s
                 <br>
                 <div class="row">   
                         <hr>                             
-                        <button type="submit" class="openbtn">Cambiar Contraseña</button>                           
+                        <button type="button" class="openbtn" id="btnChange">Cambiar Contraseña</button>                          
               </div>
                 
  
@@ -107,7 +126,7 @@ rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0s
                 
         </div>
         
-
+        <script src="../js/seguridadPasswordChange.js"></script>
 
     </body>
 </html>
