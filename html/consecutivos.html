@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Back End V-Vuelos</title>
-
-    <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />   
-
-<script src="../js/script.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consecutivos</title>
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />  
+    <script src="../js/script.js"></script>
 <link rel="stylesheet" href="../css/style2.css">
 <link rel="stylesheet" href="../css/style2.css">
 <!-- CSS only -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" 
 rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-
-
 </head>
 <body>
+
     <div id="mySidebar" class="sidebar" >
         <h3 style="color: #f1f1f1;" >    V-Vuelos Back End </h3>
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -40,15 +40,36 @@ rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0s
                 <a href="#security"><img src="../Img/checkmark.png" width="25" height="25">      Aerolineas por pais</a>
                 <a href="#security"><img src="../Img/checkmark.png" width="25" height="25">      Puertas activas</a>
       </div>
-      
       <div id="main">
         <button class="openbtn" onclick="openNav()">&#9776; Desplegar Opciones</button>
         <!-- Display User Logged Puede ser arriba a la derecha. -->
         <center>
-                <h2>Bienvenido al Back End de V-Vuelos!</h2>
-                <hr>
-                <img src="../Img/logo.png" width="300" height="350">
+                
+                
         </center>
+
+
+        <div class="col-md-5" >
+            <h3 class="label" style="text-align: center;">Lista de Consecutivos</h3>
+            <table class="table">
+                <thead>
+                    <th style="text-align: center;">Codigo</th>
+                    <th style="text-align: center;">Descripcion</th>
+                    <th style="text-align: center;">Consecutivo</th>
+                    <th></th>
+                </thead>
+                <tbody id="conList" style="text-align: center;">
+
+                </tbody>
+            </table>
+        </div>
+
+        <hr>
+
+        <button type="button" class="openbtn" id="newCon">Nuevo</button>
+
+
+
         <footer class="my-5 pt-5 text-muted text-center text-small">
                 <p class="mb-1">&copy; 2021 ULACIT</p>
                 <ul class="list-inline">
@@ -59,7 +80,14 @@ rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0s
               </footer>
       </div>
 
-    </body>
+      <script>
+        const editCons = function(value){
+            sessionStorage.setItem("description",value);
+            sessionStorage.setItem("isNew","no");
+            window.location.href = "consecutivosEdit.html";
+        }
+      </script>
+      <script src="../js/consecutivos.js"></script>
+    
+</body>
 </html>
-
-

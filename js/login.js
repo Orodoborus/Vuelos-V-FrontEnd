@@ -50,6 +50,7 @@
             }
             if(cont == 1){
                 if(userNavlist.Rol == "User"){
+                    sessionStorage.setItem("User",userNavlist.Username);
                     alert('signed in');
                 userNav.innerHTML = `<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">Inicio</a></li>
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">Vuelos</a></li>
@@ -59,6 +60,7 @@
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.html">LogOut</a></li>`;
                 }else{
                     if(userNavlist.Rol == "Admin"){
+                        sessionStorage.setItem("User",userNavlist.Username);
                         window.location.href = "html/default.html";
                         alert('Bienvenido Admin B)');
                     }
