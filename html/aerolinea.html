@@ -28,7 +28,7 @@ rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0s
 
         <a href="#admin"><img src="../Img/admin.png" width="25" height="25">     Administracion</a>
                 <a href="consecutivos.html"><img src="../Img/checkmark.png" width="20" height="20">      Consecutivos</a>
-                <a href="#security"><img src="../Img/checkmark.png" width="25" height="25">      Paises</a>
+                <a href="paises.html"><img src="../Img/checkmark.png" width="25" height="25">      Paises</a>
                 <a href="aerolinea.html"><img src="../Img/checkmark.png" width="25" height="25">      Aerolineas</a>
                 <a href="#security"><img src="../Img/checkmark.png" width="25" height="25">      Puertas del Aeropuerto</a>
 <hr>
@@ -56,33 +56,29 @@ rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0s
                     <div class="card-header">Aerolinea</div>
                     <div class="card-body">
                         <div class="form-group row">
-                            <label for="admin" class="col-sm-4 col-form-label">Administrador</label>
+                            <label for="CodAero" class="col-sm-4 col-form-label">Codigo de aerolinea</label>
                             <div class="col-sm-8">
-                               <input type="radio" class="" name="rol" id="admin">
+                               <input type="text" class="" name="rol" id="CodAero">
                             </div>
                         </div>
                         <div class="form-group row">
-                               <label for="security" class="col-sm-4 col-form-label">Seguridad</label>
+                               <label for="NameAgencia" class="col-sm-4 col-form-label">Nombre de Agencia</label>
                                <div class="col-sm-8">
-                                    <input type="radio" class="" name="rol" id="security">
+                                    <input type="text" class="" name="rol" id="NameAgencia">
                                 </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="consecutivo" class="col-sm-4 col-form-label">Consecutivo</label>
-                            <div class="col-sm-8">
-                                 <input type="radio" class="" name="rol" id="consecutivo">
-                             </div>
-                     </div>
                      <div class="form-group row">
-                        <label for="Mantenimiento" class="col-sm-4 col-form-label">Mantenimiento</label>
+                        <label for="pais" class="col-sm-4 col-form-label">Pais</label>
                         <div class="col-sm-8">
-                             <input type="radio" class="" name="rol" id="Mantenimiento">
+                            <select name="cons" id="pais" class="">
+                                <option value="Seleccione una opcion" selected>Seleccione una opcion</option>
+                            </select>
                          </div>
                  </div>
                  <div class="form-group row">
-                    <label for="User" class="col-sm-4 col-form-label">Consultas</label>
+                    <label for="User" class="col-sm-4 col-form-label">Imagen</label>
                     <div class="col-sm-8">
-                         <input type="radio" class="" name="rol" id="User">
+                         <input type="file" class="" name="rol" id="imagen">
                      </div>
              </div>
                     </div>
@@ -93,11 +89,11 @@ rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0s
 
 
             <div class="col-md-5" >
-                <h3 class="label" style="text-align: center;">Lista de Usuarios</h3>
+                <h3 class="label" style="text-align: center;">Lista de Aerolineas</h3>
                 <table class="table">
                     <thead>
-                        <th style="text-align: center;">Users</th>
-                        <th style="text-align: center;">Rol Actual</th>
+                        <th style="text-align: center;">Codigo de aerolinea</th>
+                        <th style="text-align: center;">Nombre de agencia</th>
                         <th></th>
                     </thead>
                     <tbody id="userList" style="text-align: center;">

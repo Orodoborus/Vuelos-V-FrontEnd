@@ -4,19 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ver Usuarios</title>
+    <title>Paises</title>
 
     <script src="../js/script.js"></script>
-<link rel="stylesheet" href="../css/style2.css">
-<!-- CSS only -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" 
-rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/style2.css">
+    <link rel="stylesheet" href="../css/style2.css">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" 
+    rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
 </head>
 <body>
-
 
     <div id="mySidebar" class="sidebar" >
         <h3 style="color: #f1f1f1; padding-left: 15%;" >    V-Vuelos Back End </h3>
@@ -48,80 +46,72 @@ rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0s
         <button class="openbtn" onclick="openNav()">&#9776; Desplegar Opciones</button>
         <!-- Display User Logged Puede ser arriba a la derecha. -->
         <center>
-                <h2>Ver Usuarios</h2>
+                <h2>Paises</h2>
                 <br>
                 <hr>
-                <h3>Cambio de roles de usuarios existentes</h3>
+                <h3>Administracion de paises</h3>
                 <br>
         </center>
 
-
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <div class="card">
-                        <div class="card-header">Roles</div>
+                        <div class="card-header">Aerolinea</div>
                         <div class="card-body">
                             <div class="form-group row">
-                                <label for="admin" class="col-sm-4 col-form-label">Administrador</label>
+                                <label for="CodAero" class="col-sm-4 col-form-label" >Codigo de Pais</label>
                                 <div class="col-sm-8">
-                                   <input type="radio" class="" name="rol" id="admin">
+                                   <input type="text" class="" name="rol" id="CodAero" readonly="readonly">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                   <label for="security" class="col-sm-4 col-form-label">Seguridad</label>
+                                   <label for="NameAgencia" class="col-sm-4 col-form-label">Nombre </label>
                                    <div class="col-sm-8">
-                                        <input type="radio" class="" name="rol" id="security">
+                                        <input type="text" class="" name="rol" id="NameAgencia">
                                     </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="consecutivo" class="col-sm-4 col-form-label">Consecutivo</label>
-                                <div class="col-sm-8">
-                                     <input type="radio" class="" name="rol" id="consecutivo">
-                                 </div>
-                         </div>
-                         <div class="form-group row">
-                            <label for="Mantenimiento" class="col-sm-4 col-form-label">Mantenimiento</label>
-                            <div class="col-sm-8">
-                                 <input type="radio" class="" name="rol" id="Mantenimiento">
-                             </div>
-                     </div>
                      <div class="form-group row">
-                        <label for="User" class="col-sm-4 col-form-label">Consultas</label>
+                        <label for="imagen" class="col-sm-4 col-form-label">Cargar Imagen</label>
                         <div class="col-sm-8">
-                             <input type="radio" class="" name="rol" id="User">
+                             <input type="file" accept="image/*" onchange="preview_image(event)" id="imagen">
                          </div>
-                 </div>
+                      </div>
                         </div>
-                        <div class="card-footer"><button class="openbtn" id="btnActualizar" style="width: 100%;">Actualizar Rol</button>
+                        <div class="form-group row">
+                            <label for="output_image">Imagen cargada:</label>
+                         <img id="output_image" height=200px width=200px>
+                        </div>
+                        <br>
+                        <div class="card-footer" style="text-align: center;">
+                            <button class="openbtn" id="btnCrear" >Crear</button>
+                            <button class="openbtn" id="btnEditar" >Editar</button>
+                            <button class="openbtn" id="btnEliminar" >Borrar</button>
                         </div>
                     </div>
                 </div>
+    
+    
+                
 
-
-                <div class="col-md-5" >
-                    <h3 class="label" style="text-align: center;">Lista de Usuarios</h3>
+                <div class="col-md-7" >
+                    <h3 class="label" style="text-align: center;">Lista de Aerolineas</h3>
                     <table class="table">
                         <thead>
-                            <th style="text-align: center;">Users</th>
-                            <th style="text-align: center;">Rol Actual</th>
-                            <th></th>
+                            <th style="text-align: center;">Codigo de Pais</th>
+                            <th style="text-align: center;">Nombre de Pais</th>
+                            <th style="text-align: center;">Seleccion</th>
                         </thead>
-                        <tbody id="userList" style="text-align: center;">
+                        <tbody id="countryList" style="text-align: center;">
     
                         </tbody>
                     </table>
                 </h3></div>
-
-
-                <div class="col-md-3">
-                    <h3>Usuario seleccionado:</h3>
-                    <input type="text" class="inputLabel" name="inputLabel" id="selectedUser" value="">
-                </div>
-
+    
+    
             </div>
         
-
+    
         <footer class="my-5 pt-5 text-muted text-center text-small">
             <p class="mb-1">&copy; 2021 ULACIT</p>
             <ul class="list-inline">
@@ -132,14 +122,24 @@ rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0s
           </footer>
         </div>
 
-    <!--Script Security Options-->
-<script>
-const getRow = function(myvalue){
-       selectedUser.value = myvalue;
-    }
-      </script>
-    <script src="../js/seguridad.js">
-    </script>
 
+
+
+<script type="text/javascript">
+  function preview_image(event) {
+    var reader = new FileReader();
+    reader.onload = function(){
+      var output = document.getElementById('output_image');
+      output.src = reader.result;
+    }
+    reader.readAsDataURL(event.target.files[0]);
+  }
+</script>
+
+<script src="../js/PaisAdmin.js"></script>
+
+
+
+    
 </body>
 </html>
