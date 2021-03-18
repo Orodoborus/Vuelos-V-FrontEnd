@@ -42,7 +42,7 @@
             if(cons.value == "Seleccione una opcion" || num.value == ""){
                 alert('Favor elegir una opcion y llenar todos los campos.');
             }else{
-                if(inirange.value >= finrange.value){
+                if(inirange.value > finrange.value){
                     alert('favor verificar los rangos');
                 }else{
                     console.log(inirange.value + "  " + finrange.value);
