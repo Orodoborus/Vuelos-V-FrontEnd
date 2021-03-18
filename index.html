@@ -567,16 +567,6 @@
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
 
-        <script>
-            if(sessionStorage.getItem("User") === null){
-                
-            }else{
-                document.getElementById('userNav').innerHTML += `<li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="html/login.html" value="${userNavlist.Username}">${sessionStorage.getItem("User")}</a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.html">LogOut</a></li>`;
-            }
-        </script>
-
         <!--Log In JS-->
         <script src="js/login.js"></script>
 
