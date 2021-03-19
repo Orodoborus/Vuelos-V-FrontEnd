@@ -5,6 +5,7 @@
     let btnCrear = {};
     let btnEditar = {};
     let btnEliminar = {};
+    let check = {};
 
     let countryList =[];
 
@@ -16,6 +17,7 @@
         CodAero = document.querySelector('#CodAero');
         NameAgencia = document.querySelector('#NameAgencia');
         imagen = document.querySelector('#imagen');
+        check = document.querySelector('#check');
         loadTable();
         getCons();
         bind();
@@ -107,7 +109,7 @@
                 Imagen: imagen.value
             })
         })
-        alert('Solicitud de creacion enviada!');
+        alert('Creacion exitosa!');
         updateConsID();
         }
         
@@ -115,31 +117,57 @@
     }
     
     const editExistCountry = async function(){
-        if(NameAgencia.value == "" || imagen.files.length == 0 ){
-            alert('Debe ingresar tanto el nombre de agencia, como una imagen');
+        if(NameAgencia.value == "" || imagen.files.length == 0 || !document.querySelector('input[name="codpais"]:checked')){
+            alert('Debe ingresar llenar los campos y seleccionar una fila.');
         }else{
-            consEx = await fetch('http://localhost:50498/api/Pais').then(response => response.json());
-        var length = Object.keys(consEx).length;
-        for (let index = 0; index < length; index++) {
-            infoCons = await fetch('http://localhost:50498/api/Pais/'+index).then(response => response.json());
-                var modcreate = await fetch('http://localhost:50498/api/Pais/'+index,{
-                    method:'PUT',
-                    headers: {
-                        'Content-Type':'application/json'
-                    },
-                    body:JSON.stringify({
-                        Cod_Pais: document.querySelector('input[name="codpais"]:checked').value,
-                        Nombre_Pais: NameAgencia.value,
-                        Imagen: imagen.value
-                    })
-                }).then(response => response.text().then(function(text) {
-                        return text ? JSON.parse(text) : {}
-                    }))
-                    alert('Solicitud de Edicion enviado!');
-                    window.location.href = "paises.html";
-                break;
+            if(check.checked == true){
+                consEx = await fetch('http://localhost:50498/api/Pais').then(response => response.json());
+                var length = Object.keys(consEx).length;
+                for (let index = 0; index < length; index++) {
+                    infoCons = await fetch('http://localhost:50498/api/Pais/'+index).then(response => response.json());
+                        var modcreate = await fetch('http://localhost:50498/api/Pais/'+index,{
+                            method:'PUT',
+                            headers: {
+                                'Content-Type':'application/json'
+                            },
+                            body:JSON.stringify({
+                                Cod_Pais: document.querySelector('input[name="codpais"]:checked').value,
+                                Cod_Pais2: CodAero.value,
+                                Nombre_Pais: NameAgencia.value,
+                                Imagen: imagen.value
+                            })
+                        }).then(response => response.text().then(function(text) {
+                                return text ? JSON.parse(text) : {}
+                            }))
+                            alert('Modificacion exitosa!');
+                            updateConsID();
+                        break;
+                }
+            }else{
+                consEx = await fetch('http://localhost:50498/api/Pais').then(response => response.json());
+                var length = Object.keys(consEx).length;
+                for (let index = 0; index < length; index++) {
+                    infoCons = await fetch('http://localhost:50498/api/Pais/'+index).then(response => response.json());
+                        var modcreate = await fetch('http://localhost:50498/api/Pais/'+index,{
+                            method:'PUT',
+                            headers: {
+                                'Content-Type':'application/json'
+                            },
+                            body:JSON.stringify({
+                                Cod_Pais: document.querySelector('input[name="codpais"]:checked').value,
+                                Cod_Pais2: document.querySelector('input[name="codpais"]:checked').value,
+                                Nombre_Pais: NameAgencia.value,
+                                Imagen: imagen.value
+                            })
+                        }).then(response => response.text().then(function(text) {
+                                return text ? JSON.parse(text) : {}
+                            }))
+                            alert('Modificacion exitosa!');
+                            window.location.href = "paises.html";
+                        break;
+                }
+            }
             
-        }
         }
         
     }

@@ -49,66 +49,75 @@ rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0s
                 <br>
         </center>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-header">Aerolinea</div>
-                    <div class="card-body">
-                        <div class="form-group row">
-                            <label for="CodAero" class="col-sm-4 col-form-label">Codigo de aerolinea</label>
-                            <div class="col-sm-8">
-                               <input type="text" class="" name="rol" id="CodAero">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                               <label for="NameAgencia" class="col-sm-4 col-form-label">Nombre de Agencia</label>
-                               <div class="col-sm-8">
-                                    <input type="text" class="" name="rol" id="NameAgencia">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="card">
+                        <div class="card-header">Aerolinea</div>
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label for="CodAero" class="col-sm-4 col-form-label" >Codigo de Aerolinea</label>
+                                <div class="col-sm-8">
+                                   <input type="text" class="" name="rol" id="CodAero" readonly="readonly">
                                 </div>
-                        </div>
-                     <div class="form-group row">
-                        <label for="pais" class="col-sm-4 col-form-label">Pais</label>
-                        <div class="col-sm-8">
-                            <select name="cons" id="pais" class="">
-                                <option value="Seleccione una opcion" selected>Seleccione una opcion</option>
-                            </select>
+                            </div>
+                            <div class="form-group row">
+                                <label for="check" class="col-sm-4 col-form-label" >Editar Codigo</label>
+                                <div class="col-sm-8">
+                                   <input type="checkbox" class="" name="rol" id="check">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                   <label for="NameAgencia" class="col-sm-4 col-form-label">Nombre </label>
+                                   <div class="col-sm-8">
+                                        <input type="text" class="" name="rol" id="NameAgencia">
+                                    </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="NameAgencia" class="col-sm-4 col-form-label">Pais</label>
+                                <div class="col-sm-8">
+                                     <select name="pais" id="pais"></select>
+                                 </div>
                          </div>
-                 </div>
-                 <div class="form-group row">
-                    <label for="User" class="col-sm-4 col-form-label">Imagen</label>
-                    <div class="col-sm-8">
-                         <input type="file" class="" name="rol" id="imagen">
-                     </div>
-             </div>
-                    </div>
-                    <div class="card-footer"><button class="openbtn" id="btnActualizar" style="width: 100%;">Actualizar Rol</button>
+                     <div class="form-group row">
+                        <label for="imagen" class="col-sm-4 col-form-label">Cargar Imagen</label>
+                        <div class="col-sm-8">
+                             <input type="file" accept="image/*" onchange="preview_image(event)" id="imagen">
+                         </div>
+                      </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="output_image">Imagen cargada:</label>
+                         <img id="output_image" height=200px width=200px>
+                        </div>
+                        <br>
+                        <div class="card-footer" style="text-align: center;">
+                            <button class="openbtn" id="btnCrear" >Crear</button>
+                            <button class="openbtn" id="btnEditar" >Editar</button>
+                            <button class="openbtn" id="btnEliminar" >Borrar</button>
+                        </div>
                     </div>
                 </div>
+    
+    
+                
+
+                <div class="col-md-7" >
+                    <h3 class="label" style="text-align: center;">Lista de Aerolineas</h3>
+                    <table class="table">
+                        <thead>
+                            <th style="text-align: center;">Codigo de Aerolinea</th>
+                            <th style="text-align: center;">Nombre de Agencia</th>
+                            <th style="text-align: center;">Seleccion</th>
+                        </thead>
+                        <tbody id="airList" style="text-align: center;">
+    
+                        </tbody>
+                    </table>
+                </h3></div>
+    
+    
             </div>
-
-
-            <div class="col-md-5" >
-                <h3 class="label" style="text-align: center;">Lista de Aerolineas</h3>
-                <table class="table">
-                    <thead>
-                        <th style="text-align: center;">Codigo de aerolinea</th>
-                        <th style="text-align: center;">Nombre de agencia</th>
-                        <th></th>
-                    </thead>
-                    <tbody id="userList" style="text-align: center;">
-
-                    </tbody>
-                </table>
-            </h3></div>
-
-
-            <div class="col-md-3">
-                <h3>Usuario seleccionado:</h3>
-                <input type="text" class="inputLabel" name="inputLabel" id="selectedUser" value="">
-            </div>
-
-        </div>
     
 
     <footer class="my-5 pt-5 text-muted text-center text-small">
@@ -120,6 +129,19 @@ rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0s
         </ul>
       </footer>
     </div>
+
+    <script type="text/javascript">
+        function preview_image(event) {
+          var reader = new FileReader();
+          reader.onload = function(){
+            var output = document.getElementById('output_image');
+            output.src = reader.result;
+          }
+          reader.readAsDataURL(event.target.files[0]);
+        }
+      </script>
+
+    <script src="../js/aerolineas.js"></script>
     
 </body>
 </html>
