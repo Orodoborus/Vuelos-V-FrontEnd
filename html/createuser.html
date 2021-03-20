@@ -95,6 +95,23 @@ rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0s
                                 </div>                              
 
                         </div>
+
+                        <div class="form-group row">
+                                <div class="col">
+                                        <label for="capt">Ingresar Captcha</label>
+                                        <input type="text" class="form-control" name="" id="capt" readonly>
+                                </div>
+
+                                <div class="col">
+                                        <label for="inputState">Revisar que ingresa el captcha valido</label>
+                                        <input type="text" class="form-control" placeholder="Respuesta" id="captchatxt">
+                                </div>                              
+
+                        </div>
+
+                        <div class="form-group row">
+                                <h6>Captcha no es visible? <img src="../Img/refresh.jpg" alt="refresh" width="40px" onclick="cap()"></h6>
+                        </div>
           
                   
                 </div>
@@ -118,6 +135,24 @@ rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0s
               </footer>
                 
         </div>
+
+        <script>
+                const cap = function(){
+                var caracteres = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V'
+                ,'W','X','Y','Z','1','2','3','4','5','6','7','8','9','0','a','b','c','d','e','f','g','h','i',
+                'j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z', '!','@','#','$','%','^','&','*','+']
+                     var a = caracteres[Math.floor(Math.random()*71)];
+                     var b = caracteres[Math.floor(Math.random()*71)];
+                     var c = caracteres[Math.floor(Math.random()*71)];
+                     var d = caracteres[Math.floor(Math.random()*71)];
+                     var e = caracteres[Math.floor(Math.random()*71)];
+                     var f = caracteres[Math.floor(Math.random()*71)];
+    
+                     var final = a+b+c+d+e+f;
+                     document.getElementById("capt").value=final;
+                }
+                cap();
+            </script>
         
         <script src="../js/seguridadCreateUser.js"></script>
 

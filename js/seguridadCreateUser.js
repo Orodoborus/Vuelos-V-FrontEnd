@@ -6,6 +6,8 @@
     let question = {};
     let Respuesta ={};
     let btnCreate = {};
+    let capt = {};
+    let captchatxt = {};
 
     const ini = function(){
         Username = document.querySelector('#Username');
@@ -14,6 +16,8 @@
         Email = document.querySelector('#Email');
         question = document.querySelector('#question');
         Respuesta = document.querySelector('#Respuesta');
+        captchatxt = document.querySelector('#captchatxt');
+        capt = document.querySelector('#capt');
         bind();
     }
 
@@ -37,23 +41,28 @@
             alert('Favor llenar todos los campos requeridos');
         }else{
             if(Password.value == Password2.value){
-                var new_user = await fetch('http://localhost:50498/api/Usuario',{
-            method:'POST',
-            headers:{
-                'Content-Type':'application/json'
-            },
-            body:JSON.stringify({
-                Username:Username.value,
-                Password:Password.value,
-                Rol:"User",
-                Email:Email.value,
-                Question:question.value,
-                Answer:Respuesta.value
-            })
-        }).then(response => response.text().then(function(text) {
-            return text ? JSON.parse(text) : {}
-          }))
-          cleanReg();
+                if(capt.value == captchatxt.value){
+                    var new_user = await fetch('http://localhost:50498/api/Usuario',{
+                        method:'POST',
+                        headers:{
+                            'Content-Type':'application/json'
+                        },
+                        body:JSON.stringify({
+                            Username:Username.value,
+                            Password:Password.value,
+                            Rol:"User",
+                            Email:Email.value,
+                            Question:question.value,
+                            Answer:Respuesta.value
+                        })
+                    }).then(response => response.text().then(function(text) {
+                        return text ? JSON.parse(text) : {}
+                      }))
+                      cleanReg();
+                }else{
+                    alert('Favor ingresar un captcha valido.');
+                }
+                
             }else{
                 alert('Las contraseñas no son iguales, favor revisar.');
             }

@@ -10,6 +10,10 @@
     let email = {};
     let question = {};
     let answer = {};
+    let capt = {};
+    let captchatxt = {};
+
+
     let new_users = [];
     let user_exists = [];
     let userNav = [];
@@ -26,6 +30,8 @@
         email = document.getElementById('email');
         question = document.getElementById('question');
         answer = document.getElementById('answer');
+        capt = document.getElementById('capt');
+        captchatxt = document.getElementById('captchatxt');
         btnlogin.onclick = loginProcess;
         btnregis.onclick = registrationProcess;
     }
@@ -76,24 +82,29 @@
             alert('Favor llenar todos los campos requeridos');
         }else{
             if(regispass1.value == regispass2.value){
-                var new_user = await fetch('http://localhost:50498/api/Usuario',{
-            method:'POST',
-            headers:{
-                'Content-Type':'application/json'
-            },
-            body:JSON.stringify({
-                Username:regis.value,
-                Password:regispass1.value,
-                Rol:"User",
-                Email:email.value,
-                Question:question.value,
-                Answer:answer.value
-            })
-        }).then(response => response.text().then(function(text) {
-            return text ? JSON.parse(text) : {}
-          }))
-          //.then(response => response.json())
-          cleanReg();
+                if(capt.value == captchatxt.value){
+                    var new_user = await fetch('http://localhost:50498/api/Usuario',{
+                        method:'POST',
+                        headers:{
+                            'Content-Type':'application/json'
+                        },
+                        body:JSON.stringify({
+                            Username:regis.value,
+                            Password:regispass1.value,
+                            Rol:"User",
+                            Email:email.value,
+                            Question:question.value,
+                            Answer:answer.value
+                        })
+                    }).then(response => response.text().then(function(text) {
+                        return text ? JSON.parse(text) : {}
+                      }))
+                      //.then(response => response.json())
+                      cleanReg();
+                }else{
+                    alert('Ingrese un CAPTCHA valido.');
+                }
+                
        /* new_users.push(new_user);
         console.log(new_users);
         console.log(regis.value);
@@ -113,6 +124,8 @@
         question.value= '';
         answer.value= '';
     }
+
+    
 
     ini();
 })()

@@ -244,11 +244,23 @@
               <input type="text" class="form-control" id="answer">
             </div>
           </div>
+          <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-2 col-form-label">Ingresar Captcha</label>
+            <div class="col-sm-5">
+              <input type="text" class="form-control" id="capt" readonly>
+            </div>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" id="captchatxt">
+              </div>
+          </div>
         <div class="form-group row">
           <div class="col-sm-10">
             <button type="button" class="btn btn-primary" id="btnregis">Sign Up</button>
           </div>
         </div>
+
+        <h6>Captcha no es visible? <img src="Img/refresh.jpg" alt="refresh" width="40px" onclick="cap()"></h6>
+
       </form>
     </div>
 
@@ -566,6 +578,24 @@
         <script src="assets/mail/contact_me.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+
+        <script>
+            const cap = function(){
+            var caracteres = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V'
+            ,'W','X','Y','Z','1','2','3','4','5','6','7','8','9','0','a','b','c','d','e','f','g','h','i',
+            'j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z', '!','@','#','$','%','^','&','*','+']
+                 var a = caracteres[Math.floor(Math.random()*71)];
+                 var b = caracteres[Math.floor(Math.random()*71)];
+                 var c = caracteres[Math.floor(Math.random()*71)];
+                 var d = caracteres[Math.floor(Math.random()*71)];
+                 var e = caracteres[Math.floor(Math.random()*71)];
+                 var f = caracteres[Math.floor(Math.random()*71)];
+
+                 var final = a+b+c+d+e+f;
+                 document.getElementById("capt").value=final;
+            }
+            cap();
+        </script>
 
         <!--Log In JS-->
         <script src="js/login.js"></script>
