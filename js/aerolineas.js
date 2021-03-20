@@ -5,6 +5,7 @@
     let btnCrear = {};
     let btnEditar = {};
     let btnEliminar = {};
+    let btnDelete = {};
     let check = {};
 
 
@@ -36,10 +37,11 @@
         btnCrear = document.querySelector('#btnCrear');
         btnEditar = document.querySelector('#btnEditar');
         btnEliminar = document.querySelector('#btnEliminar');
-
+        btnDelete = document.querySelector('#btnDelete');
         btnCrear.onclick = createNewAirline;
         btnEditar.onclick = editExistAirline;
         btnEliminar.onclick = deleteAirline;
+        btnDelete.onclick = eliminarRegistroAero;
     }
 
     const loadCountries = async function(){
@@ -82,11 +84,29 @@
             var length = Object.keys(consEx).length;
             for (let index = 0; index < length; index++) {
                 infoCons = await fetch('http://localhost:50498/api/ConsecutivosUpdate/'+index).then(response => response.json());
-                if(infoCons.Descripcion == "Aerolineas"){
-                    CodAero.value = infoCons.Prefijo+infoCons.Valor;
-                    break;
+                if(!infoCons.Rango_Ini == "" && !infoCons.Rango_Fin ==""){
+                    if(infoCons.Rango_Ini == infoCons.Rango_Fin){
+                        alert('Favor cambiar el rango existente, ha alcanzado su limite.');
+                        btnCrear.disabled = true;
+                        btnEditar.disabled = true;
+                        btnEliminar.disabled = true;
+                    }else{
+                        if(infoCons.Descripcion == "Aerolineas"){
+                            CodAero.value = infoCons.Prefijo+infoCons.Valor;
+                            console.log(infoCons.Rango_Ini);
+                            break;
+                        }
+                    }
+                }else{
+                    if(infoCons.Descripcion == "Aerolineas"){
+                        CodAero.value = infoCons.Prefijo+infoCons.Valor;
+                        console.log(infoCons.Rango_Ini);
+                        break;
+                    }
                 }
+                
             }
+            
     }
 
     const updateConsID = async function(){
@@ -105,7 +125,8 @@
                     },
                     body:JSON.stringify({
                         Descripcion: "Aerolineas",
-                        Valor: infoCons.Valor
+                        Valor: infoCons.Valor,
+                        Rango_Ini: infoCons.Rango_Ini
                     })
                 }).then(response => response.text().then(function(text) {
                         return text ? JSON.parse(text) : {}
@@ -118,7 +139,7 @@
     }
 
     const createNewAirline = async function(){
-        if(NameAgencia.value == "" || imagen.files.length == 0){
+        if(CodAero.value=="" || NameAgencia.value == "" || imagen.files.length == 0){
             alert('Debe ingresar tanto el nombre de agencia, como una imagen');
         }else{
             var create = await fetch('http://localhost:50498/api/Agencia',{
@@ -144,7 +165,7 @@
     }
 
     const editExistAirline = async function(){
-        if(NameAgencia.value == "" || imagen.files.length == 0 || !document.querySelector('input[name="codAgency"]:checked')){
+        if(CodAero.value=="" || NameAgencia.value == "" || imagen.files.length == 0 || !document.querySelector('input[name="codAgency"]:checked')){
             alert('Debe ingresar llenar los campos y seleccionar una fila.');
         }else{
             if(check.checked == true){
@@ -207,6 +228,37 @@
         NameAgencia.value = '';
         imagen.value = '';
         window.location.href = "aerolinea.html";
+    }
+
+    const eliminarRegistroAero = async function(){
+        if(!document.querySelector('input[name="codAgency"]:checked')){
+            alert('Debe seleccionar una fila para realizar una eliminacion de registro.');
+        }else{
+            consEx = await fetch('http://localhost:50498/api/Agencia').then(response => response.json());
+                var length = Object.keys(consEx).length;
+                for (let index = 0; index < length; index++) {
+                    infoCons = await fetch('http://localhost:50498/api/Agencia/'+index).then(response => response.json());
+                        var modcreate = await fetch('http://localhost:50498/api/Agencia/'+index,{
+                            method:'DELETE',
+                            headers: {
+                                'Content-Type':'application/json'
+                            },
+                            body:JSON.stringify({
+                                Cod_Agencia: document.querySelector('input[name="codAgency"]:checked').value,
+                                Nombre_Agencia: NameAgencia.value,
+                                Imagen: imagen.value,
+                                Cod_Pais_FK: pais.value,
+                                Cod_Aerolinea: infoCons.Cod_Aerolinea
+                            })
+                        }).then(response => response.text().then(function(text) {
+                                return text ? JSON.parse(text) : {}
+                            }))
+                            alert('Solicitud de eliminacion de registro enviada! NOTA: Recordar que si no se elimina es porque ha surgido un error.');
+                            window.location.href = "aerolinea.html";
+                        break;
+                    
+                }
+        }
     }
 
     ini();

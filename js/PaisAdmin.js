@@ -6,6 +6,7 @@
     let btnEditar = {};
     let btnEliminar = {};
     let check = {};
+    let btnDelete = {};
 
     let countryList =[];
 
@@ -27,10 +28,11 @@
         btnCrear = document.querySelector('#btnCrear');
         btnEditar = document.querySelector('#btnEditar');
         btnEliminar = document.querySelector('#btnEliminar');
-
+        btnDelete = document.querySelector('#btnDelete');
         btnCrear.onclick = createNewCountry;
         btnEditar.onclick = editExistCountry;
         btnEliminar.onclick = deleteCountry;
+        btnDelete.onclick = eliminarRegistroPais;
     }
 
 
@@ -59,10 +61,22 @@
             var length = Object.keys(consEx).length;
             for (let index = 0; index < length; index++) {
                 infoCons = await fetch('http://localhost:50498/api/ConsecutivosUpdate/'+index).then(response => response.json());
-                if(infoCons.Descripcion == "Paises"){
-                    CodAero.value = infoCons.Prefijo+infoCons.Valor;
-                    break;
+                if(!infoCons.Rango_Ini == "" && !infoCons.Rango_Fin ==""){
+                    if(infoCons.Rango_Ini == infoCons.Rango_Fin){
+                        alert('Favor cambiar el rango existente, ha alcanzado su limite.');
+                    }else{
+                        if(infoCons.Descripcion == "Paises"){
+                            CodAero.value = infoCons.Prefijo+infoCons.Valor;
+                            break;
+                        }
+                    }
+                }else{
+                    if(infoCons.Descripcion == "Paises"){
+                        CodAero.value = infoCons.Prefijo+infoCons.Valor;
+                        break;
+                    }
                 }
+                
             }
     }
 
@@ -82,7 +96,8 @@
                     },
                     body:JSON.stringify({
                         Descripcion: "Paises",
-                        Valor: infoCons.Valor
+                        Valor: infoCons.Valor,
+                        Rango_Ini: infoCons.Rango_Ini
                     })
                 }).then(response => response.text().then(function(text) {
                         return text ? JSON.parse(text) : {}
@@ -95,7 +110,7 @@
     }
 
     const createNewCountry = async function(){
-        if(NameAgencia.value == "" || imagen.files.length == 0){
+        if(CodAero.value == "" || NameAgencia.value == "" || imagen.files.length == 0){
             alert('Debe ingresar tanto el nombre de agencia, como una imagen');
         }else{
             var create = await fetch('http://localhost:50498/api/Pais',{
@@ -117,7 +132,7 @@
     }
     
     const editExistCountry = async function(){
-        if(NameAgencia.value == "" || imagen.files.length == 0 || !document.querySelector('input[name="codpais"]:checked')){
+        if(CodAero.value == "" || NameAgencia.value == "" || imagen.files.length == 0 || !document.querySelector('input[name="codpais"]:checked')){
             alert('Debe ingresar llenar los campos y seleccionar una fila.');
         }else{
             if(check.checked == true){
@@ -176,6 +191,36 @@
         NameAgencia.value = '';
         imagen.value = '';
         window.location.href = "paises.html";
+    }
+
+    const eliminarRegistroPais = async function(){
+        if(!document.querySelector('input[name="codpais"]:checked')){
+            alert('Debe seleccionar una fila para realizar una eliminacion de registro.');
+        }else{
+            consEx = await fetch('http://localhost:50498/api/Pais').then(response => response.json());
+                var length = Object.keys(consEx).length;
+                for (let index = 0; index < length; index++) {
+                    infoCons = await fetch('http://localhost:50498/api/Pais/'+index).then(response => response.json());
+                        var modcreate = await fetch('http://localhost:50498/api/Pais/'+index,{
+                            method:'DELETE',
+                            headers: {
+                                'Content-Type':'application/json'
+                            },
+                            body:JSON.stringify({
+                                Cod_Pais: document.querySelector('input[name="codpais"]:checked').value,
+                                Cod_Pais2: CodAero.value,
+                                Nombre_Pais: NameAgencia.value,
+                                Imagen: imagen.value
+                            })
+                        }).then(response => response.text().then(function(text) {
+                                return text ? JSON.parse(text) : {}
+                            }))
+                            alert('Solicitud de eliminacion de registro enviada! NOTA: Recordar que si no se elimina es porque ha surgido un error.');
+                            window.location.href = "paises.html";
+                        break;
+                    
+                }
+        }
     }
 
     ini();

@@ -6,6 +6,7 @@
     let btnCrear = {};
     let btnEditar = {};
     let btnEliminar = {};
+    let btnDelete = {};
 
     let gateList = [];
     let specificGate = [];
@@ -27,9 +28,11 @@
         btnCrear = document.querySelector('#btnCrear');
         btnEditar = document.querySelector('#btnEditar');
         btnEliminar = document.querySelector('#btnEliminar');
+        btnDelete = document.querySelector('#btnDelete');
         btnCrear.onclick = createNewGate;
         btnEditar.onclick = editExistGate;
         btnEliminar.onclick = deleteGate;
+        btnDelete.onclick = eliminarRegistroGate;
     }
 
     const loadTable = async function(){
@@ -57,10 +60,22 @@
             var length = Object.keys(consEx).length;
             for (let index = 0; index < length; index++) {
                 infoCons = await fetch('http://localhost:50498/api/ConsecutivosUpdate/'+index).then(response => response.json());
-                if(infoCons.Descripcion == "Puertas del Aeropuerto"){
-                    Codgate.value = infoCons.Prefijo+infoCons.Valor;
-                    break;
+                if(!infoCons.Rango_Ini == "" && !infoCons.Rango_Fin ==""){
+                    if(infoCons.Rango_Ini == infoCons.Rango_Fin){
+                        alert('Favor cambiar el rango existente, ha alcanzado su limite.');
+                    }else{
+                        if(infoCons.Descripcion == "Puertas del Aeropuerto"){
+                            Codgate.value = infoCons.Prefijo+infoCons.Valor;
+                            break;
+                        }
+                    }
+                }else{
+                    if(infoCons.Descripcion == "Puertas del Aeropuerto"){
+                        Codgate.value = infoCons.Prefijo+infoCons.Valor;
+                        break;
+                    }
                 }
+                
             }
     }
 
@@ -80,7 +95,8 @@
                     },
                     body:JSON.stringify({
                         Descripcion: "Puertas del Aeropuerto",
-                        Valor: infoCons.Valor
+                        Valor: infoCons.Valor,
+                        Rango_Ini: infoCons.Rango_Ini
                     })
                 }).then(response => response.text().then(function(text) {
                         return text ? JSON.parse(text) : {}
@@ -93,7 +109,7 @@
     }
 
     const createNewGate = async function(){
-        if(gateNum.value == "" || detail.value == "Seleccionar una opcion..."){
+        if(Codgate.value == "" || gateNum.value == "" || detail.value == "Seleccionar una opcion..."){
             alert('Debe ingresar todos los campos');
         }else{
             var create = await fetch('http://localhost:50498/api/Puerta',{
@@ -113,7 +129,7 @@
     }
 
     const editExistGate = async function(){
-        if(gateNum.value == "" || detail.value == "Seleccionar una opcion..." || !document.querySelector('input[name="codGate"]:checked')){
+        if(Codgate.value == "" || gateNum.value == "" || detail.value == "Seleccionar una opcion..." || !document.querySelector('input[name="codGate"]:checked')){
             alert('Debe ingresar llenar los campos y seleccionar una fila.');
         }else{
             if(check.checked == true){
@@ -172,6 +188,36 @@
         NameAgencia.value = '';
         imagen.value = '';
         window.location.href = "puertasCons.html";
+    }
+
+    const eliminarRegistroGate = async function(){
+        if(!document.querySelector('input[name="codGate"]:checked')){
+            alert('Debe seleccionar una fila para realizar una eliminacion de registro.');
+        }else{
+            consEx = await fetch('http://localhost:50498/api/Puerta').then(response => response.json());
+                var length = Object.keys(consEx).length;
+                for (let index = 0; index < length; index++) {
+                    infoCons = await fetch('http://localhost:50498/api/Puerta/'+index).then(response => response.json());
+                        var modcreate = await fetch('http://localhost:50498/api/Puerta/'+index,{
+                            method:'DELETE',
+                            headers: {
+                                'Content-Type':'application/json'
+                            },
+                            body:JSON.stringify({
+                                Cod_Puerta: document.querySelector('input[name="codGate"]:checked').value,
+                                Numero_Puerta: gateNum.value,
+                                Detalle: detail.value
+                            })
+                        }).then(response => response.text().then(function(text) {
+                                return text ? JSON.parse(text) : {}
+                            }))
+                            alert('Solicitud de eliminacion de registro enviada! NOTA: Recordar que si no se elimina es porque ha surgido un error.');
+                            window.location.href = "puertasCons.html";
+                        break;
+                    
+                }
+        }
+        
     }
 
     ini();
