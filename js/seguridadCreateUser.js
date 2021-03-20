@@ -8,6 +8,9 @@
     let btnCreate = {};
     let capt = {};
     let captchatxt = {};
+    let user = {};
+    let rol = {};
+    let logout = {};
 
     const ini = function(){
         Username = document.querySelector('#Username');
@@ -18,7 +21,69 @@
         Respuesta = document.querySelector('#Respuesta');
         captchatxt = document.querySelector('#captchatxt');
         capt = document.querySelector('#capt');
+        user = document.querySelector('#user');
+        rol = document.querySelector('#rol');
+        logout = document.querySelector('#logout');
+        user.innerText  ="User: "+ localStorage.getItem("User");
+        rol.innerText  ="Rol: "+ localStorage.getItem("Rol");
         bind();
+        showMenu();
+    }
+
+    const showMenu = function(){
+        switch(localStorage.getItem("Rol")){
+            case "Admin":
+                break;
+            case "Security":
+                document.getElementById("admin").style.display = "none";
+                document.getElementById("cons").style.display = "none";
+                document.getElementById("countries").style.display = "none";
+                document.getElementById("airlines").style.display = "none";
+                document.getElementById("gates").style.display = "none";
+                document.getElementById("consultas").style.display = "none";
+                document.getElementById("bitacora").style.display = "none";
+                document.getElementById("errors").style.display = "none";
+                document.getElementById("AerolineaCountry").style.display = "none";
+                document.getElementById("ActGates").style.display = "none";
+                break;
+            case "Consecutivo":
+                document.getElementById("Seguridad").style.display = "none";
+                document.getElementById("createU").style.display = "none";
+                document.getElementById("seeU").style.display = "none";
+                document.getElementById("changeUPass").style.display = "none";
+                document.getElementById("countries").style.display = "none";
+                document.getElementById("airlines").style.display = "none";
+                document.getElementById("gates").style.display = "none";
+                document.getElementById("consultas").style.display = "none";
+                document.getElementById("bitacora").style.display = "none";
+                document.getElementById("errors").style.display = "none";
+                document.getElementById("AerolineaCountry").style.display = "none";
+                document.getElementById("ActGates").style.display = "none";
+                break;
+            case "Mantenimiento":
+                document.getElementById("Seguridad").style.display = "none";
+                document.getElementById("createU").style.display = "none";
+                document.getElementById("seeU").style.display = "none";
+                document.getElementById("changeUPass").style.display = "none";
+                document.getElementById("cons").style.display = "none";
+                document.getElementById("consultas").style.display = "none";
+                document.getElementById("bitacora").style.display = "none";
+                document.getElementById("errors").style.display = "none";
+                document.getElementById("AerolineaCountry").style.display = "none";
+                document.getElementById("ActGates").style.display = "none";
+                 break;
+             case "Consulta":
+                document.getElementById("admin").style.display = "none";
+                document.getElementById("Seguridad").style.display = "none";
+                document.getElementById("createU").style.display = "none";
+                document.getElementById("seeU").style.display = "none";
+                document.getElementById("changeUPass").style.display = "none";
+                document.getElementById("cons").style.display = "none";
+                document.getElementById("countries").style.display = "none";
+                document.getElementById("airlines").style.display = "none";
+                document.getElementById("gates").style.display = "none";
+                break;
+          }
     }
 
     const cleanReg = function(){
@@ -33,6 +98,13 @@
     const bind = function(){
         btnCreate = document.querySelector('#btnCreate');
         btnCreate.onclick = userCreate;
+        logout.onclick = logoutUser;
+    }
+    
+    const logoutUser = function(){
+        localStorage.removeItem("User");
+        localStorage.removeItem("Rol");
+        window.location.href = '../index.html';
     }
     
 

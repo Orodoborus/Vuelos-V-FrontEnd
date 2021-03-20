@@ -55,24 +55,51 @@
                 }
             }
             if(cont == 1){
-                if(userNavlist.Rol == "User"){
-                    sessionStorage.setItem("User",userNavlist.Username);
-                    alert('signed in');
-                userNav.innerHTML = `<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">Inicio</a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">Vuelos</a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">Administracion</a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#team">Sobre Nosotros</a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="html/login.html" value="${userNavlist.Username}">${userNavlist.Username}</a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.html">LogOut</a></li>`;
-                }else{
-                    if(userNavlist.Rol == "Admin"){
-                        sessionStorage.setItem("User",userNavlist.Username);
+                switch(userNavlist.Rol){
+                    case "User":
+                        localStorage.setItem("User",userNavlist.Username);
+                        alert('Bienvenido Usuario - '+userNavlist.Username);
+                    userNav.innerHTML = `<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">Vuelos</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">Administracion</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#team">Sobre Nosotros</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="html/login.html" value="${userNavlist.Username}">${userNavlist.Username}</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.html">LogOut</a></li>`;
+                        break;
+                    case "Admin":
+                        localStorage.setItem("User",userNavlist.Username);
+                        localStorage.setItem("Rol",userNavlist.Rol);
                         window.location.href = "html/default.html";
-                        alert('Bienvenido Admin B)');
-                    }
+                        alert('Bienvenido Usuario Administrador - '+userNavlist.Username);
+                        break;
+                    case "Security":
+                        localStorage.setItem("User",userNavlist.Username);
+                        localStorage.setItem("Rol",userNavlist.Rol);
+                        window.location.href = "html/default.html";
+                        alert('Bienvenido Usuario Seguridad - '+userNavlist.Username);
+                        break;
+                    case "Consecutivo":
+                        localStorage.setItem("User",userNavlist.Username);
+                        localStorage.setItem("Rol",userNavlist.Rol);
+                        window.location.href = "html/default.html";
+                        alert('Bienvenido Usuario Consecutivo - '+userNavlist.Username);
+                        break;
+                    case "Mantenimiento":
+                        localStorage.setItem("User",userNavlist.Username);
+                        localStorage.setItem("Rol",userNavlist.Rol);
+                        window.location.href = "html/default.html";
+                        alert('Bienvenido Usuario Mantenimiento - '+userNavlist.Username);
+                        break;
+                    case "Consulta":
+                        localStorage.setItem("User",userNavlist.Username);
+                        localStorage.setItem("Rol",userNavlist.Rol);
+                        window.location.href = "html/default.html";
+                        alert('Bienvenido Usuario Consulta - '+userNavlist.Username);
+                        break;
                 }
             }else{
                 alert('Su cuenta no esta registrada, por favor dirijase al registro.');
+                window.location.href = "index.html"
             }
         }
     }

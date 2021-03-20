@@ -14,36 +14,38 @@
 
 </head>
 <body>
-
     <div id="mySidebar" class="sidebar" >
-        <h3 style="color: #f1f1f1; padding-left: 15%;" >    V-Vuelos Back End </h3>
+        <h3 style="color: #f1f1f1;" >    V-Vuelos Back End </h3>
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <a href="default.html"><img src="../Img/home.png" width="25" height="25">      Inicio</a>
 <hr>
-        <a href="#security"><img src="../Img/lock.png" width="25" height="25">      Seguridad</a>
+        <a href="#security" id="Seguridad"><img src="../Img/lock.png" width="25" height="25">      Seguridad</a>
             
-                <a href="createuser.html"><img src="../Img/checkmark.png" width="25" height="25">      Crear Usuarios</a>
-                <a href="seeUsers.html"><img src="../Img/checkmark.png" width="25" height="25">      Ver Usuarios</a>
-                <a href="changepass.html"><img src="../Img/checkmark.png" width="25" height="25">  Cambiar Contrasena</a>
+                <a href="createuser.html" id="createU"><img src="../Img/checkmark.png" width="25" height="25">      Crear Usuarios</a>
+                <a href="seeUsers.html" id="seeU"><img src="../Img/checkmark.png" width="25" height="25">      Ver Usuarios</a>
+                <a href="changepass.html" id="changeUPass"><img src="../Img/checkmark.png" width="25" height="25">  Cambiar Contrasena</a>
     
 <hr>
 
-        <a href="#admin"><img src="../Img/admin.png" width="25" height="25">     Administracion</a>
-                <a href="consecutivos.html"><img src="../Img/checkmark.png" width="20" height="20">      Consecutivos</a>
-                <a href="paises.html"><img src="../Img/checkmark.png" width="25" height="25">      Paises</a>
-                <a href="aerolinea.html"><img src="../Img/checkmark.png" width="25" height="25">      Aerolineas</a>
-                <a href="puertasCons.html"><img src="../Img/checkmark.png" width="25" height="25">      Puertas del Aeropuerto</a>
+        <a href="#admin" id="admin"><img src="../Img/admin.png"  width="25" height="25">     Administracion</a>
+                <a href="consecutivos.html" id="cons"><img src="../Img/checkmark.png" width="20" height="20">      Consecutivos</a>
+                <a href="paises.html" id="countries"><img src="../Img/checkmark.png" width="25" height="25">      Paises</a>
+                <a href="aerolinea.html" id="airlines"><img src="../Img/checkmark.png" width="25" height="25">      Aerolineas</a>
+                <a href="puertasCons.html" id="gates"><img src="../Img/checkmark.png" width="25" height="25">      Puertas del Aeropuerto</a>
 <hr>
-        <a href="#search"><img src="../Img/search.png" width="25" height="25">     Consultas</a>
-                <a href="#security"><img src="../Img/checkmark.png" width="20" height="20">      Bitacora</a>
-                <a href="#security"><img src="../Img/checkmark.png" width="25" height="25">      Errores</a>
-                <a href="#security"><img src="../Img/checkmark.png" width="25" height="25">      Aerolineas por pais</a>
-                <a href="#security"><img src="../Img/checkmark.png" width="25" height="25">      Puertas activas</a>
+        <a href="#search" id="consultas"><img src="../Img/search.png" width="25" height="25">     Consultas</a>
+                <a href="#security" id="bitacora"><img src="../Img/checkmark.png" width="20" height="20">      Bitacora</a>
+                <a href="#security" id="errors"><img src="../Img/checkmark.png" width="25" height="25">      Errores</a>
+                <a href="#security" id="AerolineaCountry"><img src="../Img/checkmark.png" width="25" height="25">      Aerolineas por pais</a>
+                <a href="#security" id="ActGates"><img src="../Img/checkmark.png" width="25" height="25">      Puertas activas</a>
       </div>
       
       <div id="main">
         <button class="openbtn" onclick="openNav()">&#9776; Desplegar Opciones</button>
         <!-- Display User Logged Puede ser arriba a la derecha. -->
+        <h3 id="user" style="text-align: right;"></h3>
+        <h4 id="rol" style="text-align: right;"></h4>
+        <h4 id="logout" class="openbtn" style="float: right;">LogOut</h4>
         <center>
                 <h2>Puertas del Aeropuerto</h2>
                 <br>
