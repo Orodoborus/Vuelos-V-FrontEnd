@@ -15,6 +15,12 @@
     let consEx = [];
     let consIs = [];
 
+    
+    let Error_Message = {};
+    var d = new Date();
+    const twoDigitMinutes = d.getMinutes().toString().replace(/^(\d)$/, '0$1');
+    let Error_Number={};
+
     const ini = function(){
         cons = document.querySelector('#cons');
         num = document.querySelector('#num');
@@ -113,9 +119,11 @@
         if(sessionStorage.getItem("isNew") == "no"){
             if(cons.value == "Seleccione una opcion" || num.value == ""){
                 alert('Favor elegir una opcion y llenar todos los campos.');
+                createNewError("Fallo al elegir campos o rellenarlos - Consecutivo");
             }else{
                 if(inirange.value > finrange.value){
                     alert('favor verificar los rangos');
+                    createNewError("Rangos invalidos. - Consecutivo");
                 }else{
                     console.log(inirange.value + "  " + finrange.value);
                     consEx = await fetch('http://localhost:50498/api/Consecutivos').then(response => response.json());
@@ -158,6 +166,7 @@
             }
             if(cont == 1){
                 alert('El consecutivo con esa descripcion ya esta creado.');
+                createNewError("Consecutivo con esa descripcion ya esta creado - Consecutivo");
             }else{
                 var create = await fetch('http://localhost:50498/api/Consecutivos',{
                 method:'POST',
@@ -194,6 +203,22 @@
             document.querySelector('#cons').disabled = true;
         }
     }
+
+    const createNewError = async function(Error_Message){  
+        var create = await fetch('http://localhost:50498/api/Errors',{
+        method:'POST',
+        headers:{
+            'Content-type':'application/json'
+        },
+        body:JSON.stringify({
+            Error_Message: Error_Message, //INSERT ERROR STRING
+            Time: d.getHours()+':'+twoDigitMinutes, //24H FORMAT
+            Date: d.getDate()+'-'+d.getMonth()+'-'+d.getFullYear(), //DD-MM-YYYY
+            Error_Number: "0000"  // INSERT ERROR CODE IF ANY
+        })
+    })
+
+    alert('Error detectado y almacenado!'); }
     
     ini();
 

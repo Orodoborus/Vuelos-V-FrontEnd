@@ -17,6 +17,13 @@
     let rol = {};
     let logout = {};
 
+    let Error_Message = {};
+    var d = new Date();
+    const twoDigitMinutes = d.getMinutes().toString().replace(/^(\d)$/, '0$1');
+    let Error_Number={};
+
+
+
     const ini = function(){
         admin = document.querySelector('#admin');
         security = document.querySelector('#security');
@@ -107,9 +114,11 @@
         if(!document.querySelector('#admin:checked') && !document.querySelector('#security:checked') && !document.querySelector('#consecutivo:checked') && 
         !document.querySelector('#Mantenimiento:checked') && !document.querySelector('#User:checked')){
             alert('Algo a sucedido, favor revisar que haya escogido un rol');
+            createNewError("Fallo al seleccionar rol - Rol Usuarios");
         }else{
             if(selectedUser.value == "Haga click en los nombres para eleccionar un usuario"){
                 alert('Porfavor elegir un usuario para realizar el cambio de rol');
+                createNewError("Fallo al seleccionar usuario - Rol Usuarios");
             }else{
             user_exists =  await fetch('http://localhost:50498/api/Usuario').then(response => response.json());
             var length =  Object.keys(user_exists).length;
@@ -219,6 +228,22 @@
                 })
                 console.log(data);
     }
+
+    const createNewError = async function(Error_Message){  
+        var create = await fetch('http://localhost:50498/api/Errors',{
+        method:'POST',
+        headers:{
+            'Content-type':'application/json'
+        },
+        body:JSON.stringify({
+            Error_Message: Error_Message, //INSERT ERROR STRING
+            Time: d.getHours()+':'+twoDigitMinutes, //24H FORMAT
+            Date: d.getDate()+'-'+d.getMonth()+'-'+d.getFullYear(), //DD-MM-YYYY
+            Error_Number: "0000"  // INSERT ERROR CODE IF ANY
+        })
+    })
+
+    alert('Error detectado y almacenado!'); }
 
     ini();
 

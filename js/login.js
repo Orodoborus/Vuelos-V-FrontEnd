@@ -19,6 +19,14 @@
     let userNav = [];
     let userNavlist = [];
 
+
+    let Error_Message = {};
+    var d = new Date();
+    const twoDigitMinutes = d.getMinutes().toString().replace(/^(\d)$/, '0$1');
+    let Error_Number={};
+
+
+
     const ini = function(){
         login = document.getElementById('login');
         loginpass = document.getElementById('loginpass');
@@ -41,6 +49,7 @@
         userNav.innerHTML='';
         if(login.value == "" || loginpass.value == ""){
             alert('Favor llenar todos los campos requeridos');
+            createNewError("No se rellenaros los espacios requeridos - LogIn");
         }else{
             user_exists =  await fetch('http://localhost:50498/api/Usuario').then(response => response.json());
             var length =  Object.keys(user_exists).length;
@@ -99,6 +108,7 @@
                 }
             }else{
                 alert('Su cuenta no esta registrada, por favor dirijase al registro.');
+                createNewError("No se encuentra registrado correctamente - LogIn");
                 window.location.href = "index.html"
             }
         }
@@ -107,6 +117,7 @@
     const registrationProcess = async function(){
         if(regis.value == "" || regispass1.value == "" || regispass2.value == "" || email.value == "" || question.value == "Seleccione una de las opciones..." || answer.value == ""){
             alert('Favor llenar todos los campos requeridos');
+            createNewError("No se rellenaros los espacios requeridos - Registro");
         }else{
             if(regispass1.value == regispass2.value){
                 if(capt.value == captchatxt.value){
@@ -130,6 +141,7 @@
                       cleanReg();
                 }else{
                     alert('Ingrese un CAPTCHA valido.');
+                    createNewError("Fallo en el CAPTCHA requerido - Registro");
                 }
                 
        /* new_users.push(new_user);
@@ -138,6 +150,7 @@
         console.log(regispass1.value);*/
             }else{
                 alert('Las contraseñas no son iguales, favor revisar.');
+                createNewError("Fallo en la verificacion de contraseñas - Registro");
             }
         }
         
@@ -151,6 +164,22 @@
         question.value= '';
         answer.value= '';
     }
+
+    const createNewError = async function(Error_Message){  
+        var create = await fetch('http://localhost:50498/api/Errors',{
+        method:'POST',
+        headers:{
+            'Content-type':'application/json'
+        },
+        body:JSON.stringify({
+            Error_Message: Error_Message, //INSERT ERROR STRING
+            Time: d.getHours()+':'+twoDigitMinutes, //24H FORMAT
+            Date: d.getDate()+'-'+d.getMonth()+'-'+d.getFullYear(), //DD-MM-YYYY
+            Error_Number: "0000"  // INSERT ERROR CODE IF ANY
+        })
+    })
+
+    alert('Error detectado y almacenado!'); }
 
     
 

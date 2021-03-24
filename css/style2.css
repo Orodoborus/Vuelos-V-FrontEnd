@@ -12,15 +12,11 @@
   transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
 }
 
-
 footer {
   position: absolute;
   bottom: 0;
   width: 75%;
-  
- }
-
-
+}
 
 /* The sidebar links */
 .sidebar a {
@@ -80,8 +76,13 @@ footer {
   }
 }
 
-.inputLabel{
+.inputLabel {
   background: rgba(0, 0, 0, 0);
   border: none;
   width: 100%;
+}
+
+.body {
+  height: 100px;
+  overflow: auto;
 }

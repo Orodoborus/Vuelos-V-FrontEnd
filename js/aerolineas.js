@@ -24,6 +24,14 @@
     let info2 = [];
 
 
+    let Error_Message = {};
+    var d = new Date();
+    const twoDigitMinutes = d.getMinutes().toString().replace(/^(\d)$/, '0$1');
+    let Error_Number={};
+
+    
+
+
     const ini = function(){
         CodAero = document.querySelector('#CodAero');
         NameAgencia = document.querySelector('#NameAgencia');
@@ -158,6 +166,7 @@
                 if(!infoCons.Rango_Ini == "" && !infoCons.Rango_Fin ==""){
                     if(infoCons.Rango_Ini == infoCons.Rango_Fin){
                         alert('Favor cambiar el rango existente, ha alcanzado su limite.');
+                        createNewError("Limite del rango alcanzado - Aerolineas");
                         btnCrear.disabled = true;
                         btnEditar.disabled = true;
                         btnEliminar.disabled = true;
@@ -212,6 +221,7 @@
     const createNewAirline = async function(){
         if(CodAero.value=="" || NameAgencia.value == "" || imagen.files.length == 0){
             alert('Debe ingresar tanto el nombre de agencia, como una imagen');
+            createNewError("No se ingresaron los datos necesarios - Crear Aerolinea");
         }else{
             var create = await fetch('http://localhost:50498/api/Agencia',{
             method:'POST',
@@ -238,6 +248,7 @@
     const editExistAirline = async function(){
         if(CodAero.value=="" || NameAgencia.value == "" || imagen.files.length == 0 || !document.querySelector('input[name="codAgency"]:checked')){
             alert('Debe ingresar llenar los campos y seleccionar una fila.');
+            createNewError("No se ingresaron los datos necesarios o no se selecciono la fila - Editar Aerolinea");
         }else{
             if(check.checked == true){
                 consEx = await fetch('http://localhost:50498/api/Agencia').then(response => response.json());
@@ -304,6 +315,7 @@
     const eliminarRegistroAero = async function(){
         if(!document.querySelector('input[name="codAgency"]:checked')){
             alert('Debe seleccionar una fila para realizar una eliminacion de registro.');
+            createNewError("No se selecciono una fila - Eliminar Aerolinea");
         }else{
             consEx = await fetch('http://localhost:50498/api/Agencia').then(response => response.json());
                 var length = Object.keys(consEx).length;
@@ -331,6 +343,24 @@
                 }
         }
     }
+
+    const createNewError = async function(Error_Message){  
+        var create = await fetch('http://localhost:50498/api/Errors',{
+        method:'POST',
+        headers:{
+            'Content-type':'application/json'
+        },
+        body:JSON.stringify({
+            Error_Message: Error_Message, //INSERT ERROR STRING
+            Time: d.getHours()+':'+twoDigitMinutes, //24H FORMAT
+            Date: d.getDate()+'-'+d.getMonth()+'-'+d.getFullYear(), //DD-MM-YYYY
+            Error_Number: "0000"  // INSERT ERROR CODE IF ANY
+        })
+    })
+
+    alert('Error detectado y almacenado!'); }
+
+
 
     ini();
 

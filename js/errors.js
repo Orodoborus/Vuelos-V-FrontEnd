@@ -18,7 +18,6 @@
     let Error_Message = {};
     var d = new Date();
     const twoDigitMinutes = d.getMinutes().toString().replace(/^(\d)$/, '0$1');
-
     let Error_Number={};
 
 
@@ -55,7 +54,7 @@
         getErrors();
         //bind();
         showMenu();
-        createNewError();
+        //createNewError("Holi");//Insertar el String del Error as a String.
     }
 
     const bind = function(){
@@ -125,14 +124,14 @@
                 break;
           }
     }
-    const createNewError = async function(){  
+    const createNewError = async function(Error_Message){  
             var create = await fetch('http://localhost:50498/api/Errors',{
             method:'POST',
             headers:{
                 'Content-type':'application/json'
             },
             body:JSON.stringify({
-                Error_Message: 'ErrorTest', //INSERT ERROR STRING
+                Error_Message: Error_Message, //INSERT ERROR STRING
                 Time: d.getHours()+':'+twoDigitMinutes, //24H FORMAT
                 Date: d.getDate()+'-'+d.getMonth()+'-'+d.getFullYear(), //DD-MM-YYYY
                 Error_Number: "0000"  // INSERT ERROR CODE IF ANY

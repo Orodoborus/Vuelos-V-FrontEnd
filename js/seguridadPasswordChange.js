@@ -13,6 +13,11 @@
     let info = [];
     let data =[];
 
+    let Error_Message = {};
+    var d = new Date();
+    const twoDigitMinutes = d.getMinutes().toString().replace(/^(\d)$/, '0$1');
+    let Error_Number={};
+
 
     const ini = function(){
         user = document.querySelector('#user');
@@ -103,9 +108,27 @@
           }
     }
 
+    const createNewError = async function(Error_Message){  
+        var create = await fetch('http://localhost:50498/api/Errors',{
+        method:'POST',
+        headers:{
+            'Content-type':'application/json'
+        },
+        body:JSON.stringify({
+            Error_Message: Error_Message, //INSERT ERROR STRING
+            Time: d.getHours()+':'+twoDigitMinutes, //24H FORMAT
+            Date: d.getDate()+'-'+d.getMonth()+'-'+d.getFullYear(), //DD-MM-YYYY
+            Error_Number: "0000"  // INSERT ERROR CODE IF ANY
+        })
+    })
+
+    alert('Error detectado y almacenado!');   
+}
+
     const changePass = async function(){
         if(user.value == "" || passAct == "" || passNew == "" || passNew2 == "" || question == "Seleccione una de las opciones..." || answer.values == "" ){
             alert('Favor llenar todos los campos');
+            createNewError("Favor llenar todos los campos - Cambiar Contrasena");
         }else{
             user_exists =  await fetch('http://localhost:50498/api/UsuarioPassword').then(response => response.json());
             var length =  Object.keys(user_exists).length;
@@ -140,15 +163,19 @@
                         window.location.reload();
                             }else{
                                 alert('Respuesta incorrecta.')
+                                createNewError("Respuesta incorrecta - Cambiar Contrasena");
                             }
                         }else{
                             alert('Pregunta incorrecta.')
+                            createNewError("Pregunta incorrecta - Cambiar Contrasena");
                         }
                     }else{
                         alert('Las contraseñas ingresadas no son iguales');
+                        createNewError("Las contraseñas ingresadas no son iguales - Cambiar Contrasena");
                     }
                 }else{
                     alert('No existe el usuario.');
+                    createNewError("No existe el usuario - Cambiar Contrasena");
                 }
             }
         }

@@ -17,6 +17,12 @@
 
     let consEx = [];
 
+    let Error_Message = {};
+    var d = new Date();
+    const twoDigitMinutes = d.getMinutes().toString().replace(/^(\d)$/, '0$1');
+    let Error_Number={};
+
+
     const ini = function(){
         Codgate = document.querySelector('#Codgate');
         check = document.querySelector('#check');
@@ -135,6 +141,7 @@
                 if(!infoCons.Rango_Ini == "" && !infoCons.Rango_Fin ==""){
                     if(infoCons.Rango_Ini == infoCons.Rango_Fin){
                         alert('Favor cambiar el rango existente, ha alcanzado su limite.');
+                        createNewError("Rango alcanzo su limite - Consecutivos");
                     }else{
                         if(infoCons.Descripcion == "Puertas del Aeropuerto"){
                             Codgate.value = infoCons.Prefijo+infoCons.Valor;
@@ -183,6 +190,7 @@
     const createNewGate = async function(){
         if(Codgate.value == "" || gateNum.value == "" || detail.value == "Seleccionar una opcion..."){
             alert('Debe ingresar todos los campos');
+            createNewError("Fallo al ingresar los datos necesarios - Crear Puerta");
         }else{
             var create = await fetch('http://localhost:50498/api/Puerta',{
             method:'POST',
@@ -203,6 +211,7 @@
     const editExistGate = async function(){
         if(Codgate.value == "" || gateNum.value == "" || detail.value == "Seleccionar una opcion..." || !document.querySelector('input[name="codGate"]:checked')){
             alert('Debe ingresar llenar los campos y seleccionar una fila.');
+            createNewError("Fallo al ingresar los datos necesarios - Editar Puerta");
         }else{
             if(check.checked == true){
                 consEx = await fetch('http://localhost:50498/api/Puerta').then(response => response.json());
@@ -265,6 +274,7 @@
     const eliminarRegistroGate = async function(){
         if(!document.querySelector('input[name="codGate"]:checked')){
             alert('Debe seleccionar una fila para realizar una eliminacion de registro.');
+            createNewError("Fallo al seleccionar una fila - Eliminar Registro Puerta");
         }else{
             consEx = await fetch('http://localhost:50498/api/Puerta').then(response => response.json());
                 var length = Object.keys(consEx).length;
@@ -291,6 +301,22 @@
         }
         
     }
+
+    const createNewError = async function(Error_Message){  
+        var create = await fetch('http://localhost:50498/api/Errors',{
+        method:'POST',
+        headers:{
+            'Content-type':'application/json'
+        },
+        body:JSON.stringify({
+            Error_Message: Error_Message, //INSERT ERROR STRING
+            Time: d.getHours()+':'+twoDigitMinutes, //24H FORMAT
+            Date: d.getDate()+'-'+d.getMonth()+'-'+d.getFullYear(), //DD-MM-YYYY
+            Error_Number: "0000"  // INSERT ERROR CODE IF ANY
+        })
+    })
+
+    alert('Error detectado y almacenado!'); }
 
     ini();
 
