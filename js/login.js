@@ -139,6 +139,7 @@
                       }))
                       //.then(response => response.json())
                       cleanReg();
+                      alert('Cuenta creada!');
                 }else{
                     alert('Ingrese un CAPTCHA valido.');
                     createNewError("Fallo en el CAPTCHA requerido - Registro");

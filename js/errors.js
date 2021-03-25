@@ -54,7 +54,7 @@
         user.innerText  ="User: "+ localStorage.getItem("User");
         rol.innerText  ="Rol: "+ localStorage.getItem("Rol");
         getErrors();
-        //bind();
+        bind();
         showMenu();
         //filter();
         

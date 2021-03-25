@@ -126,6 +126,7 @@
 }
 
     const changePass = async function(){
+        var x = 0;
         if(user.value == "" || passAct == "" || passNew == "" || passNew2 == "" || question == "Seleccione una de las opciones..." || answer.values == "" ){
             alert('Favor llenar todos los campos');
             createNewError("Favor llenar todos los campos - Cambiar Contrasena");
@@ -160,7 +161,7 @@
                         }))
                         alert('Cambio de contraseña exitosa');
                         clean();
-                        window.location.reload();
+                        window.location.href = 'changepass.html';
                             }else{
                                 alert('Respuesta incorrecta.')
                                 createNewError("Respuesta incorrecta - Cambiar Contrasena");
@@ -174,9 +175,12 @@
                         createNewError("Las contraseñas ingresadas no son iguales - Cambiar Contrasena");
                     }
                 }else{
-                    alert('No existe el usuario.');
-                    createNewError("No existe el usuario - Cambiar Contrasena");
+                    x = x+1;
                 }
+            }
+            if(x != 0){
+                alert('No existe el usuario.');
+                createNewError("No existe el usuario - Cambiar Contrasena");
             }
         }
         

@@ -137,6 +137,7 @@
                     }).then(response => response.text().then(function(text) {
                         return text ? JSON.parse(text) : {}
                       }))
+                      alert('Cuenta Creada!');
                       cleanReg();
                 }else{
                     alert('Favor ingresar un captcha valido.');
