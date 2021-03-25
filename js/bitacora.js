@@ -145,6 +145,7 @@
                 <td value="${e.FechaTime}">${e.FechaTime}</td>
                 <td value="${e.Tipo}">${e.Tipo}</td>
                 <td value="${e.Time}">${e.Time}</td>
+                <a href="http://localhost:50498/api/Bitacora/${(e.Cod_Registro)-1}">Link</a>
                 </tr>`
             })
         }
