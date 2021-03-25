@@ -37,6 +37,8 @@
         Error_Message = document.querySelector('#Error_Message');
         Error_Number = document.querySelector('#Error_Number');
 
+       
+
 
 
 
@@ -54,8 +56,55 @@
         getErrors();
         //bind();
         showMenu();
-        //createNewError("Holi");//Insertar el String del Error as a String.
+        //filter();
+        
     }
+
+    $('#FInicial').on('keyup',function(){
+        var valueinicial = $(this).val()
+        console.log(valueinicial)
+        //var data = searchTable(valueinicial,data)
+    })
+
+    $('#FFinal').on('keyup',function(){
+        var valuefinal = $(this).val()
+        console.log(valuefinal)
+    })
+    /*
+
+    function searchTable (valueinicial,data)
+    {
+        var filteredData = []
+
+        for(var i =0; i<data.length; i++)
+        {
+            var fecha = data[i].fecha
+            if(fecha.incluedes(valueinicial))
+            
+            {
+                filteredData.push(data[i])
+
+            }
+            
+
+
+        }
+
+        return filteredData
+
+    }
+
+    const filter = function()
+    {
+
+
+
+
+
+    }
+    */
+
+
 
     const bind = function(){
         btnActualizar = document.querySelector('#btnActualizar');

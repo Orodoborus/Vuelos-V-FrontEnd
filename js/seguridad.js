@@ -220,10 +220,10 @@
             }
 
                 tableUser.innerHTML = data.map(e=>{
-                    return `<tr>
+                    return`<tr>
                     <td value="${e.Username}" id="${e.Username}">${e.Username}</td>
                     <td value="${e.Rol}" id="${e.Rol}">${e.Rol}</td>
-                        <td><button type="button" class="openbtn" id="${e.Username}" value="${e.Username}" id="btn${e.Username}" onclick="getRow('${e.Username}')">Seleccionar Usuario</button><td/>
+                    <td><button type="button" class="openbtn" id="${e.Username}" value="${e.Username}" id="btn${e.Username}" onclick="getRow('${e.Username}')">Seleccionar Usuario</button><td/>
                     </tr>`
                 })
                 console.log(data);
@@ -238,7 +238,7 @@
         body:JSON.stringify({
             Error_Message: Error_Message, //INSERT ERROR STRING
             Time: d.getHours()+':'+twoDigitMinutes, //24H FORMAT
-            Date: d.getDate()+'-'+d.getMonth()+'-'+d.getFullYear(), //DD-MM-YYYY
+            Date: '-', //DD-MM-YYYY
             Error_Number: "0000"  // INSERT ERROR CODE IF ANY
         })
     })
