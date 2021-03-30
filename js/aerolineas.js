@@ -29,7 +29,6 @@
     const twoDigitMinutes = d.getMinutes().toString().replace(/^(\d)$/, '0$1');
     let Error_Number={};
 
-    
 
 
     const ini = function(){
