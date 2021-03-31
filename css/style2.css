@@ -82,6 +82,11 @@ footer {
   width: 100%;
 }
 
+.inputLabel2 {
+  background: rgba(0, 0, 0, 0);
+  border: none;
+}
+
 .body {
   height: 100px;
   overflow: auto;
