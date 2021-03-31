@@ -141,7 +141,9 @@
                                 Valor: num.value,
                                 Prefijo: prefijo.value,
                                 Rango_ini:inirange.value,
-                                Rango_Fin: finrange.value
+                                Rango_Fin: finrange.value,
+                                UsernameC: localStorage.getItem("User"),
+                                UserCod: info.Codigo_Consecutivo
                             })
                         }).then(response => response.text().then(function(text) {
                                 return text ? JSON.parse(text) : {}
@@ -178,7 +180,8 @@
                     Valor: num.value,
                     Prefijo: prefijo.value,
                     Rango_ini:inirange.value,
-                    Rango_Fin: finrange.value
+                    Rango_Fin: finrange.value,
+                    UsernameC: localStorage.getItem("User")
                 })
             })
             alert('Creacion exitosa!');

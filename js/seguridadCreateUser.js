@@ -132,7 +132,8 @@
                             Rol:"User",
                             Email:Email.value,
                             Question:question.value,
-                            Answer:Respuesta.value
+                            Answer:Respuesta.value,
+                            UsernameC: localStorage.getItem("User")
                         })
                     }).then(response => response.text().then(function(text) {
                         return text ? JSON.parse(text) : {}

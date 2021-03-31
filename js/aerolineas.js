@@ -205,7 +205,8 @@
                     body:JSON.stringify({
                         Descripcion: "Aerolineas",
                         Valor: infoCons.Valor,
-                        Rango_Ini: infoCons.Rango_Ini
+                        Rango_Ini: infoCons.Rango_Ini,
+                        UsernameC: localStorage.getItem("User")
                     })
                 }).then(response => response.text().then(function(text) {
                         return text ? JSON.parse(text) : {}
@@ -222,6 +223,8 @@
             alert('Debe ingresar tanto el nombre de agencia, como una imagen');
             createNewError("No se ingresaron los datos necesarios - Crear Aerolinea");
         }else{
+            var path = imagen.value;
+            var filename = path.replace(/^.*\\/, "");
             var create = await fetch('http://localhost:50498/api/Agencia',{
             method:'POST',
             headers:{
@@ -230,11 +233,13 @@
             body:JSON.stringify({
                 Cod_Agencia: "0",
                 Nombre_Agencia: NameAgencia.value,
-                Imagen: imagen.value,
+                Imagen: filename,
                 Cod_Pais_FK: pais.value,
-                Cod_Aerolinea: CodAero.value
+                Cod_Aerolinea: CodAero.value,
+                UsernameC: localStorage.getItem("User")
             })
         })
+        console.log(localStorage.getItem("User"));
         console.log(NameAgencia.value);
         console.log(imagen.value);
         console.log(pais.value);
@@ -254,6 +259,8 @@
         var length = Object.keys(consEx).length;
         for (let index = 0; index < length; index++) {
             infoCons = await fetch('http://localhost:50498/api/Agencia/'+index).then(response => response.json());
+            var path = imagen.value;
+            var filename = path.replace(/^.*\\/, "");
                 var modcreate = await fetch('http://localhost:50498/api/Agencia/'+index,{
                     method:'PUT',
                     headers: {
@@ -262,9 +269,11 @@
                     body:JSON.stringify({
                         Cod_Agencia: document.querySelector('input[name="codAgency"]:checked').value,
                         Nombre_Agencia: NameAgencia.value,
-                        Imagen: imagen.value,
+                        Imagen: filename,
                         Cod_Pais_FK: pais.value,
-                        Cod_Aerolinea: CodAero.value
+                        Cod_Aerolinea: CodAero.value,
+                        UsernameC: localStorage.getItem("User"),
+                        UserCod: document.querySelector('input[name="codAgency"]:checked').value
                     })
                 }).then(response => response.text().then(function(text) {
                         return text ? JSON.parse(text) : {}
@@ -278,6 +287,8 @@
                 var length = Object.keys(consEx).length;
                 for (let index = 0; index < length; index++) {
                     infoCons = await fetch('http://localhost:50498/api/Agencia/'+index).then(response => response.json());
+                    var path = imagen.value;
+                    var filename = path.replace(/^.*\\/, "");
                         var modcreate = await fetch('http://localhost:50498/api/Agencia/'+index,{
                             method:'PUT',
                             headers: {
@@ -286,9 +297,11 @@
                             body:JSON.stringify({
                                 Cod_Agencia: document.querySelector('input[name="codAgency"]:checked').value,
                                 Nombre_Agencia: NameAgencia.value,
-                                Imagen: imagen.value,
+                                Imagen: filename,
                                 Cod_Pais_FK: pais.value,
-                                Cod_Aerolinea: infoCons.Cod_Aerolinea
+                                Cod_Aerolinea: infoCons.Cod_Aerolinea,
+                                UsernameC: localStorage.getItem("User"),
+                                UserCod: document.querySelector('input[name="codAgency"]:checked').value
                             })
                         }).then(response => response.text().then(function(text) {
                                 return text ? JSON.parse(text) : {}
@@ -330,7 +343,9 @@
                                 Nombre_Agencia: NameAgencia.value,
                                 Imagen: imagen.value,
                                 Cod_Pais_FK: pais.value,
-                                Cod_Aerolinea: infoCons.Cod_Aerolinea
+                                Cod_Aerolinea: infoCons.Cod_Aerolinea,
+                                UsernameC: localStorage.getItem("User"),
+                                UserCod: document.querySelector('input[name="codAgency"]:checked').value
                             })
                         }).then(response => response.text().then(function(text) {
                                 return text ? JSON.parse(text) : {}

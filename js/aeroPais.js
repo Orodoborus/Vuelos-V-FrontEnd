@@ -171,7 +171,7 @@
             <tr>
             <td>${e.Cod_Agencia}</td>
             <td>${e.Nombre_Agencia}</td>
-            <td>${e.Imagen}</td>
+            <td><img src="../Img/Imgs/${e.Imagen}" alt="${e.Imagen}" height="50px"></td>
             </tr>
             `
         })

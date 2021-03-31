@@ -175,7 +175,8 @@
                     body:JSON.stringify({
                         Descripcion: "Puertas del Aeropuerto",
                         Valor: infoCons.Valor,
-                        Rango_Ini: infoCons.Rango_Ini
+                        Rango_Ini: infoCons.Rango_Ini,
+                        UsernameC: localStorage.getItem("User")
                     })
                 }).then(response => response.text().then(function(text) {
                         return text ? JSON.parse(text) : {}
@@ -200,7 +201,8 @@
             body:JSON.stringify({
                 Cod_Puerta: Codgate.value,
                 Numero_Puerta: gateNum.value,
-                Detalle: detail.value
+                Detalle: detail.value,
+                UsernameC: localStorage.getItem("User")
             })
         })
         alert('Creacion exitosa!');
@@ -227,7 +229,9 @@
                         Cod_Puerta: document.querySelector('input[name="codGate"]:checked').value,
                         Cod_Puerta2: Codgate.value,
                         Numero_Puerta: gateNum.value,
-                        Detalle: detail.value
+                        Detalle: detail.value,
+                        UsernameC: localStorage.getItem("User"),
+                        UserCod: document.querySelector('input[name="codGate"]:checked').value
                     })
                 }).then(response => response.text().then(function(text) {
                         return text ? JSON.parse(text) : {}
@@ -248,8 +252,11 @@
                             },
                             body:JSON.stringify({
                                 Cod_Puerta: document.querySelector('input[name="codGate"]:checked').value,
+                                Cod_Puerta2: document.querySelector('input[name="codGate"]:checked').value,
                                 Numero_Puerta: gateNum.value,
-                                Detalle: detail.value
+                                Detalle: detail.value,
+                                UsernameC: localStorage.getItem("User"),
+                                UserCod: document.querySelector('input[name="codGate"]:checked').value
                             })
                         }).then(response => response.text().then(function(text) {
                                 return text ? JSON.parse(text) : {}
@@ -288,7 +295,9 @@
                             body:JSON.stringify({
                                 Cod_Puerta: document.querySelector('input[name="codGate"]:checked').value,
                                 Numero_Puerta: gateNum.value,
-                                Detalle: detail.value
+                                Detalle: detail.value,
+                                UsernameC: localStorage.getItem("User"),
+                                UserCod: document.querySelector('input[name="codGate"]:checked').value
                             })
                         }).then(response => response.text().then(function(text) {
                                 return text ? JSON.parse(text) : {}

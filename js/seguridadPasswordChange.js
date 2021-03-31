@@ -154,7 +154,9 @@
                             body:JSON.stringify({
                                 Username:user.value,
                                 Rol:"",
-                                Password:passNew.value
+                                Password:passNew.value,
+                                UsernameC: localStorage.getItem("User"),
+                                UserCod: info.Cod_User
                             })
                         }).then(response => response.text().then(function(text) {
                             return text ? JSON.parse(text) : {}

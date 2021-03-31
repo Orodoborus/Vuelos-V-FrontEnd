@@ -175,7 +175,8 @@
                     body:JSON.stringify({
                         Descripcion: "Paises",
                         Valor: infoCons.Valor,
-                        Rango_Ini: infoCons.Rango_Ini
+                        Rango_Ini: infoCons.Rango_Ini,
+                        UsernameC: localStorage.getItem("User")
                     })
                 }).then(response => response.text().then(function(text) {
                         return text ? JSON.parse(text) : {}
@@ -192,6 +193,8 @@
             alert('Debe ingresar tanto el nombre de agencia, como una imagen');
             createNewError("Fallo a ingresar los datos requeridos - Registrar Pais");
         }else{
+            var path = imagen.value;
+            var filename = path.replace(/^.*\\/, "");
             var create = await fetch('http://localhost:50498/api/Pais',{
             method:'POST',
             headers:{
@@ -200,7 +203,8 @@
             body:JSON.stringify({
                 Cod_Pais: CodAero.value,
                 Nombre_Pais: NameAgencia.value,
-                Imagen: imagen.value
+                Imagen: filename,
+                UsernameC: localStorage.getItem("User")
             })
         })
         alert('Creacion exitosa!');
@@ -220,6 +224,8 @@
                 var length = Object.keys(consEx).length;
                 for (let index = 0; index < length; index++) {
                     infoCons = await fetch('http://localhost:50498/api/Pais/'+index).then(response => response.json());
+                    var path = imagen.value;
+                    var filename = path.replace(/^.*\\/, "");
                         var modcreate = await fetch('http://localhost:50498/api/Pais/'+index,{
                             method:'PUT',
                             headers: {
@@ -229,7 +235,9 @@
                                 Cod_Pais: document.querySelector('input[name="codpais"]:checked').value,
                                 Cod_Pais2: CodAero.value,
                                 Nombre_Pais: NameAgencia.value,
-                                Imagen: imagen.value
+                                Imagen: filename,
+                                UsernameC: localStorage.getItem("User"),
+                                UserCod: document.querySelector('input[name="codpais"]:checked').value
                             })
                         }).then(response => response.text().then(function(text) {
                                 return text ? JSON.parse(text) : {}
@@ -243,6 +251,8 @@
                 var length = Object.keys(consEx).length;
                 for (let index = 0; index < length; index++) {
                     infoCons = await fetch('http://localhost:50498/api/Pais/'+index).then(response => response.json());
+                    var path = imagen.value;
+                    var filename = path.replace(/^.*\\/, "");
                         var modcreate = await fetch('http://localhost:50498/api/Pais/'+index,{
                             method:'PUT',
                             headers: {
@@ -252,7 +262,9 @@
                                 Cod_Pais: document.querySelector('input[name="codpais"]:checked').value,
                                 Cod_Pais2: document.querySelector('input[name="codpais"]:checked').value,
                                 Nombre_Pais: NameAgencia.value,
-                                Imagen: imagen.value
+                                Imagen: filename,
+                                UsernameC: localStorage.getItem("User"),
+                                UserCod: document.querySelector('input[name="codpais"]:checked').value
                             })
                         }).then(response => response.text().then(function(text) {
                                 return text ? JSON.parse(text) : {}
@@ -292,7 +304,9 @@
                                 Cod_Pais: document.querySelector('input[name="codpais"]:checked').value,
                                 Cod_Pais2: CodAero.value,
                                 Nombre_Pais: NameAgencia.value,
-                                Imagen: imagen.value
+                                Imagen: imagen.value,
+                                UsernameC: localStorage.getItem("User"),
+                                UserCod: document.querySelector('input[name="codpais"]:checked').value
                             })
                         }).then(response => response.text().then(function(text) {
                                 return text ? JSON.parse(text) : {}

@@ -132,8 +132,9 @@
                                 'Content-Type':'application/json'
                             },
                             body:JSON.stringify({
-                                Username:selectedUser.value,
-                                Rol:"Admin"
+                                Username:info.Cod_User,
+                                Rol:"Admin",
+                                UsernameC: localStorage.getItem("User")
                             })
                         }).then(response => response.text().then(function(text) {
                             return text ? JSON.parse(text) : {}
@@ -146,8 +147,9 @@
                                 'Content-Type':'application/json'
                             },
                             body:JSON.stringify({
-                                Username:selectedUser.value,
-                                Rol:"Security"
+                                Username:info.Cod_User,
+                                Rol:"Security",
+                                UsernameC: localStorage.getItem("User")
                             })
                         }).then(response => response.text().then(function(text) {
                             return text ? JSON.parse(text) : {}
@@ -160,8 +162,9 @@
                                 'Content-Type':'application/json'
                             },
                             body:JSON.stringify({
-                                Username:selectedUser.value,
-                                Rol:"Consecutivo"
+                                Username:info.Cod_User,
+                                Rol:"Consecutivo",
+                                UsernameC: localStorage.getItem("User")
                             })
                         }).then(response => response.text().then(function(text) {
                             return text ? JSON.parse(text) : {}
@@ -174,8 +177,9 @@
                                 'Content-Type':'application/json'
                             },
                             body:JSON.stringify({
-                                Username:selectedUser.value,
-                                Rol:"Mantenimiento"
+                                Username:info.Cod_User,
+                                Rol:"Mantenimiento",
+                                UsernameC: localStorage.getItem("User")
                             })
                         }).then(response => response.text().then(function(text) {
                             return text ? JSON.parse(text) : {}
@@ -188,8 +192,9 @@
                                 'Content-Type':'application/json'
                             },
                             body:JSON.stringify({
-                                Username:selectedUser.value,
-                                Rol:"Consulta"
+                                Username:info.Cod_User,
+                                Rol:"Consulta",
+                                UsernameC: localStorage.getItem("User")
                             })
                         }).then(response => response.text().then(function(text) {
                             return text ? JSON.parse(text) : {}
@@ -221,7 +226,7 @@
 
                 tableUser.innerHTML = data.map(e=>{
                     return`<tr>
-                    <td value="${e.Username}" id="${e.Username}">${e.Username}</td>
+                    <td value="${e.Cod_User}" id="${e.Username}">${e.Username}</td>
                     <td value="${e.Rol}" id="${e.Rol}">${e.Rol}</td>
                     <td><button type="button" class="openbtn" id="${e.Username}" value="${e.Username}" id="btn${e.Username}" onclick="getRow('${e.Username}')">Seleccionar Usuario</button><td/>
                     </tr>`
