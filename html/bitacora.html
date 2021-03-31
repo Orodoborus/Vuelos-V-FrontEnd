@@ -67,7 +67,7 @@ rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0s
                             <div class="form-group row">
                                 <label for="CodAero" class="col-sm-4 col-form-label" >Usuario</label>
                                 <div class="col-sm-8">
-                                   <input type="text" class="" name="rol" id="Codgate">
+                                    <select name="users" id="users"></select>
                                 </div>
                                 <hr>
                             </div>
@@ -97,19 +97,19 @@ rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0s
                                 <div class="form-group row">
                                     <label for="admin" class="col-sm-4 col-form-label">Agregar</label>
                                     <div class="col-sm-8">
-                                       <input type="checkbox" class="" name="rol" id="admin">
+                                       <input type="radio" class="" name="type" value="Create" id="add">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                        <label for="security" class="col-sm-4 col-form-label">Eliminar</label>
                                        <div class="col-sm-8">
-                                            <input type="checkbox" class="" name="rol" id="security">
+                                            <input type="radio" class="" name="type" value="Delete" id="del">
                                         </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="consecutivo" class="col-sm-4 col-form-label">Modificar</label>
                                     <div class="col-sm-8">
-                                         <input type="checkbox" class="" name="rol" id="consecutivo">
+                                         <input type="radio" class="" name="type" value="Update" id="mod">
                                      </div>
                              </div>                                         
                             </div>
@@ -117,7 +117,7 @@ rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0s
                         </div>
                         <br>
                         <div class="card-footer" style="text-align: center;">
-                            <button class="openbtn" id="buscarBitacora" >Buscar</button>
+                            <button class="openbtn" id="buscarBitacora" >Filtrar</button>
                         </div>
                     </div>
                 </div>
@@ -128,13 +128,11 @@ rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0s
                             <h3 class="label" style="text-align: center;">Lista de acciones - Bitacora</h3>
                             <table class="table" >
                                 <thead>
-                                    <th style="text-align: center;">Cod Regis:</th>
-                                    <th style="text-align: center;"> Codigo registro:</th>
-                                    <th style="text-align: center;">Usuario:</th>
-                                    <th style="text-align: center;">Descripcion:</th>
-                                    <th style="text-align: center;">Fecha:</th>
-                                    <th style="text-align: center;">Detalle:</th>
-                                    <th style="text-align: center;">Hora:</th>
+                                    <th style="text-align: center;">Codigo registro</th>
+                                    <th style="text-align: center;">Fecha</th>
+                                    <th style="text-align: center;">Hora</th>
+                                    <th style="text-align: center;">Descripcion</th>
+                                    <th style="text-align: center;">Link</th>
                                     
                                 </thead>
                                 <tbody id="bitacoraList" style="text-align: center;">
