@@ -14,11 +14,22 @@
     let eachBitacora2 = [];
     let onlyOneBitacora2 = [];
 
+    let seeAllBitacora = {};
+
 
     let Error_Message = {};
     var d = new Date();
     const twoDigitMinutes = d.getMinutes().toString().replace(/^(\d)$/, '0$1');
     let Error_Number={};
+
+    let iniDia = {};
+    let iniMes = {};
+    let iniAno = {};
+
+    let finDia = {};
+    let finMes = {};
+    let finAno = {};
+
 
 
     let add = {};
@@ -44,10 +55,14 @@
         Error_Message = document.querySelector('#Error_Message');
         Error_Number = document.querySelector('#Error_Number');
 
-        admin = document.querySelector('#admin');
-        security = document.querySelector('#security');
-        consecutivo = document.querySelector('#consecutivo');
-        Mantenimiento = document.querySelector('#Mantenimiento');
+        iniDia = document.querySelector('#iniDia');
+        iniMes = document.querySelector('#iniMes');
+        iniAno = document.querySelector('#iniAno');
+
+        finDia = document.querySelector('#finDia');
+        finMes = document.querySelector('#finMes');
+        finAno = document.querySelector('#finAno');
+        
         add = document.querySelector('#add');
         del = document.querySelector('#del');
         mod = document.querySelector('#mod');
@@ -66,7 +81,9 @@
 
     const bind = function(){
         btnActualizar = document.querySelector('#buscarBitacora');
+        seeAllBitacora = document.querySelector('#seeAllBitacora');
         btnActualizar.onclick = filterAct;
+        seeAllBitacora.onclick = seealldatabitacora;
         logout.onclick = logoutUser;
     }
 
@@ -148,15 +165,40 @@
     }
 
     const filterAct = async function(){
-
-        var cont1 = 0;
-        var cont2 = 0;
-        var cont3 = 0;
-
         if(!users.value == ""){
-      /*      if(validacionFECHA){*/
-        cont1 = cont1 +1;
-          /*  }else{*/
+            if(!iniDia.value == "" || !iniMes.value == "" || !iniAno.value == "" || !finDia.value == "" || !finMes.value == "" || !finAno.value == ""){
+                /*usuario y fecha definitivamente es seleccionado*/ 
+                if(document.querySelector('input[name="type"]:checked')){
+                    /*FILTRO DE USUARIO, TIPO Y RANGOS DE FECHA*/
+                    var sendFilter = await fetch('http://localhost:50498/api/BitacoraTypeUserRangeDatesFilter',{
+                        method:'POST',
+                        headers:{
+                            'Content-Type':'application/json'
+                        },
+                        body:JSON.stringify({
+                            Tipo: document.querySelector('input[name="type"]:checked').value,
+                            Cod_User_FK: users.value,
+                            date1: iniDia.value+ "-"+iniMes.value+"-"+iniAno.value,
+                            date2: finDia.value+ "-"+finMes.value+"-"+finAno.value
+                        })
+                    })
+                    getNewTableDatesTypeUser();
+                }else{
+                    /*SOLO FILTRO DE USUARIO Y RANGOS DE FECHA*/ 
+                    var sendFilter = await fetch('http://localhost:50498/api/BitacorasRangoFechaAndUser',{
+                        method:'POST',
+                        headers:{
+                            'Content-Type':'application/json'
+                        },
+                        body:JSON.stringify({
+                            Cod_User_FK: users.value,
+                            date1: iniDia.value+ "-"+iniMes.value+"-"+iniAno.value,
+                            date2: finDia.value+ "-"+finMes.value+"-"+finAno.value
+                        })
+                    })
+                    getNewTableDateRangeAndUser();
+                }
+           }else{
             if(document.querySelector('input[name="type"]:checked')){
                 /*FILTRO DE USUARIO Y TIPO*/
                     var sendFilter = await fetch('http://localhost:50498/api/BitacoraTypeAndUserFilter',{
@@ -184,50 +226,76 @@
                 })
                 getNewTable();
             }
-           /* }*/
-        }
-        
-        /*if(validacionFECHA){
-
-        }else{
-            if(users.value = ""){
-
-                    
-            }else{
-                if(document.querySelector('input[name="type"]:checked')){
-          
-                }
             }
-        } */
-
-        if(document.querySelector('input[name="type"]:checked')){
-            if(!users.value == ""){
-                /*FILTRO DE USUARIO Y TIPO*/
-                var sendFilter = await fetch('http://localhost:50498/api/BitacoraTypeAndUserFilter',{
+        }else{
+            if(iniDia.value == "" || iniMes.value == "" || iniAno.value == "" || finDia.value == "" || finMes.value == "" || finAno.value == ""){
+                if(document.querySelector('input[name="type"]:checked')){
+                    if(!users.value == ""){
+                        /*FILTRO DE USUARIO Y TIPO*/
+                        var sendFilter = await fetch('http://localhost:50498/api/BitacoraTypeAndUserFilter',{
+                            method:'POST',
+                            headers:{
+                                'Content-Type':'application/json'
+                            },
+                            body:JSON.stringify({
+                                Tipo: document.querySelector('input[name="type"]:checked').value,
+                                Cod_User_FK: users.value
+                            })
+                        })
+                        getNewTableTypeAndUser();
+                    }else{
+                        /* SOLO TIPO */
+                        var sendFilter = await fetch('http://localhost:50498/api/BitacoraTypeFiltered',{
+                         method:'POST',
+                         headers:{
+                                'Content-Type':'application/json'
+                         },
+                         body:JSON.stringify({
+                              Tipo: document.querySelector('input[name="type"]:checked').value
+                            })
+                        })
+                        getNewTableType();
+                    }
+            }
+        }else{
+            if(document.querySelector('input[name="type"]:checked')){
+                /* SOLO TIPO Y FECHA */
+                var sendFilter = await fetch('http://localhost:50498/api/BitacoraTypeAndDateFilter',{
                     method:'POST',
                     headers:{
-                        'Content-Type':'application/json'
+                           'Content-Type':'application/json'
                     },
                     body:JSON.stringify({
-                        Tipo: document.querySelector('input[name="type"]:checked').value,
-                        Cod_User_FK: users.value
-                    })
-                })
+                         Tipo: document.querySelector('input[name="type"]:checked').value,
+                         date1: iniDia.value+ "-"+iniMes.value+"-"+iniAno.value,
+                         date2: finDia.value+ "-"+finMes.value+"-"+finAno.value
+                       })
+                   })
+                   getNewTableDateRangeAndType();
+                
             }else{
-                var sendFilter = await fetch('http://localhost:50498/api/BitacoraTypeFiltered',{
-                 method:'POST',
-                 headers:{
-                        'Content-Type':'application/json'
-                 },
-                 body:JSON.stringify({
-                      Tipo: document.querySelector('input[name="type"]:checked').value
+                /* SOLO FECHAS */
+                var sendFilter = await fetch('http://localhost:50498/api/BitacoraFilterByDateRange',{
+                        method:'POST',
+                        headers:{
+                            'Content-Type':'application/json'
+                        },
+                        body:JSON.stringify({
+                            date1: iniDia.value+ "-"+iniMes.value+"-"+iniAno.value,
+                            date2: finDia.value+ "-"+finMes.value+"-"+finAno.value
+                        })
                     })
-                })
-                getNewTableType();
+                    getNewTableByDateRange();
+    
             }
-            
+
         }
+        
+         
+
+        
     }
+}
 
     const getNewTable = async function(){
         bitacoralist2 = document.querySelector('#bitacoraList');
@@ -236,6 +304,90 @@
             var length = Object.keys(allbitacoras2).length;
             for (let index = 0; index < length; index++) {
                 onlyOneBitacora2 = await fetch('http://localhost:50498/api/BitacoraUserFiltered/'+index).then(response => response.json());
+                eachBitacora2[index] = onlyOneBitacora2;
+            }
+            bitacoralist2.innerHTML = eachBitacora2.map(e=>{
+                return `               
+                <tr>
+                <td value="${e.Cod_Registro}" id="${e.Cod_Registro}">${e.Cod_Registro}</td>
+                <td value="${e.Descripcion}">${e.Descripcion}</td>
+                <td value="${e.FechaTime}">${e.FechaTime}</td>
+                <td value="${e.Time}">${e.Time}</td>
+                <td><button type="button" class="openbtn" onclick="bitaDetail('${e.Cod_Registro}')">Seleccionar Usuario</button></td>
+                </tr>`
+            })
+    }
+
+    const getNewTableDateRangeAndType = async function(){
+        bitacoralist2 = document.querySelector('#bitacoraList');
+        bitacoralist2.innerHTML = '';
+        allbitacoras2 = await fetch('http://localhost:50498/api/BitacoraTypeAndDateFilter').then(response => response.json());
+            var length = Object.keys(allbitacoras2).length;
+            for (let index = 0; index < length; index++) {
+                onlyOneBitacora2 = await fetch('http://localhost:50498/api/BitacoraTypeAndDateFilter/'+index).then(response => response.json());
+                eachBitacora2[index] = onlyOneBitacora2;
+            }
+            bitacoralist2.innerHTML = eachBitacora2.map(e=>{
+                return `               
+                <tr>
+                <td value="${e.Cod_Registro}" id="${e.Cod_Registro}">${e.Cod_Registro}</td>
+                <td value="${e.Descripcion}">${e.Descripcion}</td>
+                <td value="${e.FechaTime}">${e.FechaTime}</td>
+                <td value="${e.Time}">${e.Time}</td>
+                <td><button type="button" class="openbtn" onclick="bitaDetail('${e.Cod_Registro}')">Seleccionar Usuario</button></td>
+                </tr>`
+            })
+    }
+
+    const getNewTableDateRangeAndUser = async function(){
+        bitacoralist2 = document.querySelector('#bitacoraList');
+        bitacoralist2.innerHTML = '';
+        allbitacoras2 = await fetch('http://localhost:50498/api/BitacorasRangoFechaAndUser').then(response => response.json());
+            var length = Object.keys(allbitacoras2).length;
+            for (let index = 0; index < length; index++) {
+                onlyOneBitacora2 = await fetch('http://localhost:50498/api/BitacorasRangoFechaAndUser/'+index).then(response => response.json());
+                eachBitacora2[index] = onlyOneBitacora2;
+            }
+            bitacoralist2.innerHTML = eachBitacora2.map(e=>{
+                return `               
+                <tr>
+                <td value="${e.Cod_Registro}" id="${e.Cod_Registro}">${e.Cod_Registro}</td>
+                <td value="${e.Descripcion}">${e.Descripcion}</td>
+                <td value="${e.FechaTime}">${e.FechaTime}</td>
+                <td value="${e.Time}">${e.Time}</td>
+                <td><button type="button" class="openbtn" onclick="bitaDetail('${e.Cod_Registro}')">Seleccionar Usuario</button></td>
+                </tr>`
+            })
+    }
+
+    const getNewTableDatesTypeUser = async function(){
+        bitacoralist2 = document.querySelector('#bitacoraList');
+        bitacoralist2.innerHTML = '';
+        allbitacoras2 = await fetch('http://localhost:50498/api/BitacoraTypeUserRangeDatesFilter').then(response => response.json());
+            var length = Object.keys(allbitacoras2).length;
+            for (let index = 0; index < length; index++) {
+                onlyOneBitacora2 = await fetch('http://localhost:50498/api/BitacoraTypeUserRangeDatesFilter/'+index).then(response => response.json());
+                eachBitacora2[index] = onlyOneBitacora2;
+            }
+            bitacoralist2.innerHTML = eachBitacora2.map(e=>{
+                return `               
+                <tr>
+                <td value="${e.Cod_Registro}" id="${e.Cod_Registro}">${e.Cod_Registro}</td>
+                <td value="${e.Descripcion}">${e.Descripcion}</td>
+                <td value="${e.FechaTime}">${e.FechaTime}</td>
+                <td value="${e.Time}">${e.Time}</td>
+                <td><button type="button" class="openbtn" onclick="bitaDetail('${e.Cod_Registro}')">Seleccionar Usuario</button></td>
+                </tr>`
+            })
+    }
+
+    const getNewTableByDateRange = async function(){
+        bitacoralist2 = document.querySelector('#bitacoraList');
+        bitacoralist2.innerHTML = '';
+        allbitacoras2 = await fetch('http://localhost:50498/api/BitacoraFilterByDateRange').then(response => response.json());
+            var length = Object.keys(allbitacoras2).length;
+            for (let index = 0; index < length; index++) {
+                onlyOneBitacora2 = await fetch('http://localhost:50498/api/BitacoraFilterByDateRange/'+index).then(response => response.json());
                 eachBitacora2[index] = onlyOneBitacora2;
             }
             bitacoralist2.innerHTML = eachBitacora2.map(e=>{
@@ -306,12 +458,16 @@
                 return `               
                 <tr>
                 <td value="${e.Cod_Registro}" id="${e.Cod_Registro}">${e.Cod_Registro}</td>
-                <td value="${e.Descripcion}">${e.Descripcion}</td>
                 <td value="${e.FechaTime}">${e.FechaTime}</td>
                 <td value="${e.Time}">${e.Time}</td>
+                <td value="${e.Descripcion}">${e.Descripcion}</td>
                 <td><button type="button" class="openbtn" onclick="bitaDetail('${e.Cod_Registro}')">Seleccionar Usuario</button></td>
                 </tr>`
             })
+        }
+
+        const seealldatabitacora = function(){
+            window.location.href = "bitacora.html";
         }
 
     ini();  
