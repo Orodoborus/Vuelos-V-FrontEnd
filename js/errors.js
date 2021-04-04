@@ -14,6 +14,8 @@
     let eachError = [];
     let onlyOneError = [];
 
+    let seeAllErrors = {};
+
 
     let Error_Message = {};
     var d = new Date();
@@ -32,10 +34,32 @@
     let rol = {};
     let logout = {};
 
+    let iniDia = {};
+    let iniMes = {};
+    let iniAno = {};
+
+    let finDia = {};
+    let finMes = {};
+    let finAno = {};
+
+    let errorlist2 = [];
+    let allerrors2 = [];
+    let eachError2 = [];
+    let onlyOneError2 = [];
+
+
     const ini = function(){
 
         Error_Message = document.querySelector('#Error_Message');
         Error_Number = document.querySelector('#Error_Number');
+
+        iniDia = document.querySelector('#iniDia');
+        iniMes = document.querySelector('#iniMes');
+        iniAno = document.querySelector('#iniAno');
+
+        finDia = document.querySelector('#finDia');
+        finMes = document.querySelector('#finMes');
+        finAno = document.querySelector('#finAno');
 
        
 
@@ -59,6 +83,45 @@
         //filter();
         
     }
+
+
+    const filterAct = async function(){
+        /* SOLO FECHAS */
+        var sendFilter = await fetch('http://localhost:50498/api/ErrorsFilterByDateRange',{
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify({
+                    date1: iniDia.value+ "-"+iniMes.value+"-"+iniAno.value,
+                    date2: finDia.value+ "-"+finMes.value+"-"+finAno.value
+                })
+            })
+            getNewTableByDateRange();
+
+    }
+
+    const getNewTableByDateRange = async function(){
+        errorlist2 = document.querySelector('#errorList');
+        errorlist2.innerHTML = '';
+        allerrors2 = await fetch('http://localhost:50498/api/ErrorsFilterByDateRange').then(response => response.json());
+            var length = Object.keys(allerrors2).length;
+            for (let index = 0; index < length; index++) {
+                onlyOneError2 = await fetch('http://localhost:50498/api/ErrorsFilterByDateRange/'+index).then(response => response.json());
+                eachError2[index] = onlyOneError2;
+            }
+            errorlist2.innerHTML = eachError2.map(e=>{
+                return `               
+                <tr>
+                <td value="${e.Error_ID}" id="${e.Error_ID}">${e.Error_ID}</td>
+                <td value="${e.Error_Message}">${e.Error_Message}</td>
+                <td value="${e.Time}">${e.Time}</td>
+                <td value="${e.Date}">${e.Date}</td>
+                <td value="${e.Error_Number}">${e.Error_Number}</td>
+                </tr>`
+            })
+    }
+
 
     $('#FInicial').on('keyup',function(){
         var valueinicial = $(this).val()
@@ -107,8 +170,10 @@
 
 
     const bind = function(){
-        btnActualizar = document.querySelector('#btnActualizar');
-        btnActualizar.onclick = actualizar;
+        btnActualizar = document.querySelector('#buscarErrors');
+        seeAllErrors = document.querySelector('#seeAllErrors');
+        btnActualizar.onclick = filterAct;
+        seeAllErrors.onclick = seealldataerrors;
         logout.onclick = logoutUser;
     }
 
@@ -212,6 +277,9 @@
                 <td value="${e.Error_Number}">${e.Error_Number}</td>
                 </tr>`
             })
+        }
+        const seealldataerrors = function(){
+            window.location.href = "seeErrors.html";
         }
 
     ini();  

@@ -62,22 +62,45 @@ rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0s
         <div class="container" >
             <div class="row">
                 <div class="col" >
-                    <div class="col">
-                        <h3>Aplicar Filtro</h3>
-                        <br>
-                        <label>Fecha Inicial: </label>
-                        <input type="text"  value="15-01-2020" id="FInicial">
-                        
+                  <h6>Formato dd-mm-yyyy</h6>
+                  <div class="form-group row">
+                      <label for="iniDia" class="col-sm-4 col-form-label" >Fecha de Inicio:</label>
+                      <div class="col-sm-2">
+                          <input type="number" class="" style="width: 100%;" placeholder="DD" min="1" max="31"  name="rol" id="iniDia">
+                      </div>
+                      <label for="iniDia" class="col-sm-1 col-form-label" >-</label>
+                      <div class="col-sm-2">
+                          <input type="number" class="" style="width: 100%;" placeholder="MM" min="1" max="12"  name="rol" id="iniMes">
+                      </div>
+                      <label for="iniDia" class="col-sm-1 col-form-label" >-</label>
+                      <div class="col-sm-2">
+                          <input type="number" class="" style="width: 100%;" placeholder="YYYY" min="1950" max="2025"  name="rol" id="iniAno">
+                      </div>
+                  
+                  </div>
+                 
+  
+                  <div class="form-group row">
+                      <label for="check" class="col-sm-4 col-form-label" >Fecha Final:</label>
+                      <div class="col-sm-2">
+                          <input type="number" class="" style="width: 100%;" min="1" max="31"  placeholder="DD" name="rol" id="finDia">
+                      </div>
+                      <label for="iniDia" class="col-sm-1 col-form-label" >-</label>
+                      <div class="col-sm-2">
+                          <input type="number" class="" style="width: 100%;"  min="1" max="12"  placeholder="MM" name="rol" id="finMes">
+                      </div>
+                      <label for="iniDia" class="col-sm-1 col-form-label" >-</label>
+                      <div class="col-sm-2">
+                          <input type="number" class="" style="width: 100%;" placeholder="YYYY" min="1950" max="2025"  name="rol" id="finAno">
                       </div>
                       <hr>
-
-                      <div class="col">
-                        <label>Fecha Final: </label>
-                        <input type="text"   value="15-01-2021" id="FFinal">                        
-                      </div>
+                  </div>
                       <br>
                       <center>
-                        <button style="text-align: center;" class="openbtn">Filtrar</button>
+                        <div class="card-footer" style="text-align: center;">
+                          <button class="openbtn" id="buscarErrors" >Filtrar</button>
+                          <button class="openbtn" id="seeAllErrors" >Mostrar todo</button>
+                      </div>
                       </center>
                       <br>
                       
