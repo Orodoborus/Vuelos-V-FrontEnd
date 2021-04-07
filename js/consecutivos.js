@@ -62,6 +62,7 @@
                 document.getElementById("errors").style.display = "none";
                 document.getElementById("AerolineaCountry").style.display = "none";
                 document.getElementById("ActGates").style.display = "none";
+                document.getElementById("flights").style.display = "none";
                 break;
             case "Consecutivo":
                 document.getElementById("Seguridad").style.display = "none";
@@ -76,6 +77,7 @@
                 document.getElementById("errors").style.display = "none";
                 document.getElementById("AerolineaCountry").style.display = "none";
                 document.getElementById("ActGates").style.display = "none";
+                document.getElementById("flights").style.display = "none";
                 break;
             case "Mantenimiento":
                 document.getElementById("Seguridad").style.display = "none";
@@ -88,6 +90,7 @@
                 document.getElementById("errors").style.display = "none";
                 document.getElementById("AerolineaCountry").style.display = "none";
                 document.getElementById("ActGates").style.display = "none";
+                document.getElementById("flights").style.display = "none";
                  break;
              case "Consulta":
                 document.getElementById("admin").style.display = "none";
@@ -99,6 +102,7 @@
                 document.getElementById("countries").style.display = "none";
                 document.getElementById("airlines").style.display = "none";
                 document.getElementById("gates").style.display = "none";
+                document.getElementById("flights").style.display = "none";
                 break;
           }
     }
