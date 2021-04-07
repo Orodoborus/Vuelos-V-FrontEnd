@@ -461,7 +461,7 @@
                 <td value="${e.FechaTime}">${e.FechaTime}</td>
                 <td value="${e.Time}">${e.Time}</td>
                 <td value="${e.Descripcion}">${e.Descripcion}</td>
-                <td><button type="button" class="openbtn" onclick="bitaDetail('${e.Cod_Registro}')">Seleccionar Usuario</button></td>
+                <td><button type="button" class="openbtn" onclick="bitaDetail('${e.Cod_Registro}')">Detalle de bitacora</button></td>
                 </tr>`
             })
         }
