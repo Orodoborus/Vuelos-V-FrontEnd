@@ -29,7 +29,6 @@
                     <ul class="navbar-nav text-uppercase ml-auto" id="userNav">
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">Inicio</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">Vuelos</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">Administracion</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#team">Sobre Nosotros</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#logInReg">Login</a></li>
                     </ul>
@@ -576,6 +575,27 @@
         <!-- Contact form JS-->
         <script src="assets/mail/jqBootstrapValidation.js"></script>
         <script src="assets/mail/contact_me.js"></script>
+
+        <script>
+            if(localStorage.getItem("User") != null){
+                document.getElementById('userNav').innerHTML = '';
+                document.getElementById('userNav').innerHTML = `
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">Vuelos</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#team">Sobre Nosotros</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" value="${localStorage.getItem("User")}">${localStorage.getItem("User")}</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" onclick="logout()">LogOut</a></li>
+                `;
+            }
+            const logout = function(){
+                localStorage.removeItem("User");
+                localStorage.removeItem("Rol");
+                window.location.href = "../index.html";
+            }
+
+        </script>
+
+
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
 

@@ -67,13 +67,9 @@
                 switch(userNavlist.Rol){
                     case "User":
                         localStorage.setItem("User",userNavlist.Username);
+                        localStorage.setItem("Rol",userNavlist.Rol);
                         alert('Bienvenido Usuario - '+userNavlist.Username);
-                    userNav.innerHTML = `<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">Vuelos</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">Administracion</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#team">Sobre Nosotros</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="html/login.html" value="${userNavlist.Username}">${userNavlist.Username}</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.html">LogOut</a></li>`;
+                        window.location.href = "../index.html";
                         break;
                     case "Admin":
                         localStorage.setItem("User",userNavlist.Username);
