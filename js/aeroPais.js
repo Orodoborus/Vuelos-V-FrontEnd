@@ -96,6 +96,13 @@
         seeAll = document.querySelector('#seeAll');
         filter.onclick = activateFilter;
         seeAll.onclick = mostrarTodos;
+        logout.onclick = logoutUser;
+    }
+
+    const logoutUser = function(){
+        localStorage.removeItem("User");
+        localStorage.removeItem("Rol");
+        window.location.href = '../index.html';
     }
 
     const mostrarTodos = function(){
