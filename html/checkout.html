@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmacion de compra</title>
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />  
+    <script src="../js/script.js"></script>
+<link rel="stylesheet" href="../css/style2.css">
+<link rel="stylesheet" href="../css/style2.css">
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" 
+rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+</head>
+<body>
+  <div id="mySidebar" class="sidebar" >
+    <h3 style="color: #f1f1f1;" >    V-Vuelos Back End </h3>
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="default.html"><img src="../Img/home.png" width="25" height="25">      Inicio</a>
+<hr>
+    <a href="#security" id="Seguridad"><img src="../Img/lock.png" width="25" height="25">      Seguridad</a>
+        
+            <a href="createuser.html" id="createU"><img src="../Img/checkmark.png" width="25" height="25">      Crear Usuarios</a>
+            <a href="seeUsers.html" id="seeU"><img src="../Img/checkmark.png" width="25" height="25">      Ver Usuarios</a>
+            <a href="changepass.html" id="changeUPass"><img src="../Img/checkmark.png" width="25" height="25">  Cambiar Contrasena</a>
+
+<hr>
+
+    <a href="#admin" id="admin"><img src="../Img/admin.png"  width="25" height="25">     Administracion</a>
+            <a href="consecutivos.html" id="cons"><img src="../Img/checkmark.png" width="20" height="20">      Consecutivos</a>
+            <a href="paises.html" id="countries"><img src="../Img/checkmark.png" width="25" height="25">      Paises</a>
+            <a href="aerolinea.html" id="airlines"><img src="../Img/checkmark.png" width="25" height="25">      Aerolineas</a>
+            <a href="puertasCons.html" id="gates"><img src="../Img/checkmark.png" width="25" height="25">      Puertas del Aeropuerto</a>
+<hr>
+    <a href="#search" id="consultas"><img src="../Img/search.png" width="25" height="25">     Consultas</a>
+            <a href="bitacora.html" id="bitacora"><img src="../Img/checkmark.png" width="20" height="20">      Bitacora</a>
+            <a href="seeErrors.html" id="errors"><img src="../Img/checkmark.png" width="25" height="25">      Errores</a>
+            <a href="aeroPais.html" id="AerolineaCountry"><img src="../Img/checkmark.png" width="25" height="25">      Aerolineas por pais</a>
+            <a href="puertasAct.html" id="ActGates"><img src="../Img/checkmark.png" width="25" height="25">      Puertas activas</a>     
+  </div>
+      <div id="main">
+        <button class="openbtn" onclick="openNav()">&#9776; Desplegar Opciones</button>
+        <!-- Display User Logged Puede ser arriba a la derecha. -->
+        <h3 id="user" style="text-align: right;"></h3>
+        <h4 id="rol" style="text-align: right;"></h4>
+        <h4 id="logout" class="openbtn" style="float: right;">LogOut</h4>
+        <center>
+                
+                
+        </center>
+
+
+        <div class="col-md-5" >
+            <h3 class="label" style="text-align: right;">Confirmacion de compra</h3>
+        </div>
+
+        <hr>
+
+        <div class="col-md-5">
+         
+            
+            </div>
+            <div class="cart">
+          <!--    <ul class="tableHead">
+                <li class="prodHeader">Product</li>
+                <li>Quantity</li>
+                <li>Total</li>
+                 <li>Remove</li>
+              </ul>-->
+        
+                  
+              <div class="infoWrap" > 
+                  <div class="cartSection">
+              
+                
+                   
+                  
+            
+                     <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12 col-md-4 col-md-offset-4">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <h3 class="text-center">Metodo de pago</h3>
+                                            <h style="font-size: large;" class="text-align">Detalles de pago</h>
+                                            <img class="img-responsive cc-img" src="http://www.prepbootstrap.com/Content/images/shared/misc/creditcardicons.png">
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <form role="form">
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="form-group">
+                                                        <label>Numero de tarjeta</label>
+                                                        <div class="input-group">
+                                                            <input type="tel" class="form-control" placeholder="1111 1111 1111 1111
+                                                            " />
+                                                            <span class="input-group-addon"><span class="fa fa-credit-card"></span></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-7 col-md-7">
+                                                    <div class="form-group">
+                                                        <label><span class="hidden-xs">Fecha de expiracion</span><span class="visible-xs-inline"></span> </label>
+                                                        <input type="tel" class="form-control" placeholder="MM / YY" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-5 col-md-5 pull-right">
+                                                    <div class="form-group">
+                                                        <label>Codigo de seguridad</label>
+                                                        <input type="tel" class="form-control" placeholder="CVC" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="form-group">
+                                                        <label>Numero de tarjeta</label>
+                                                        <input type="text" class="form-control" placeholder="Filipino de los Vientos" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container" style="float: right; margin-top: -375px;">
+                        <div class="row">
+                            <div class="col-xs-12 col-md-4 col-md-offset-4">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <h3 class="text-center">Resumen</h3>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div>  
+                                            <label for="appt">Vuelta:</label>
+                                              <input type="date" id="appt" name="appt"></div>
+                                             
+                                            <br>
+                                            
+                                            <label for="appt"> Ida:  </label>
+                                            <input  type="date" id= "appt" name="appt">
+                                        <form role="form">
+                                         <br>
+                                           
+                                                <div class="col-xs-7 col-md-7">
+                                                    <div class="form-group">
+                                                        <label><span class="hidden-xs" style="font-weight: bold;">Seguro obligatorio: $100</span><span class="visible-xs-inline"></span> </label>
+                                                        
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="col-xs-5 col-md-5 pull-right">
+                                                    <div class="form-group">
+                                                        <label style="font-weight: bold;">Pasajero(s)<s</label>
+                                                        <input max="10" min="1" type="number" class="form-control" placeholder="0" />
+                                                    </div>
+                                                </div>
+                                            
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="form-group">
+                                                        <label  class="col-sm-4 col-form-label" >IVA:</label>
+                                                        <input class="inputLabel2 col-sm-4 col-form-label" id="Tax" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="form-group">
+                                                        <label  class="col-sm-4 col-form-label" >Total:</label>
+                                                        <input class="inputLabel2 col-sm-4 col-form-label" id="Tax" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <br>
+                                    <div class="panel-footer">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <button class="btn btn-warning btn-lg btn-block">Process payment</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>  
+              
+                  
+                  
+                  </div>
+                  
+                    
+                     
+                </div>
+                
+                
+          
+                  
+                 <div class="infoWrap"></div> 
+                  <div class="cartSection">
+                   
+                 
+           
+                
+               
+            </div>
+            
+            
+           
+          </div>
+          
+        
+  
+  
+      <script src="../js/checkout.js"></script>
+    
+</body>
+</html>
