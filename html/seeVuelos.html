@@ -29,7 +29,7 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ml-auto" id="userNav">
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">Explorar Vuelos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/html/seeVuelos.html">Vuelos</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#team">Sobre Nosotros</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#logInReg">Login</a></li>
                     </ul>
@@ -47,7 +47,7 @@
 <!-- Son input radios con cara de boton-->
                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                     <label class="btn btn-primary active">
-                      <input type="radio" name="options" id="buyrent" autocomplete="off" checked><span class="material-icons">add_shopping_cart</span> Compras - Reservas
+                      <input type="radio" name="options" id="buyflight" autocomplete="off" checked><span class="material-icons">add_shopping_cart</span> Compras - Reservas
                     </label>
                     <label class="btn btn-secondary">
                       <input type="radio" name="options" id="salida" autocomplete="off">
@@ -65,39 +65,30 @@
 <!-- Target para Filtros-->
 
 
-        <section class="page-section bg-gray">
-            <div class="masthead-subheading">Filtrar: </div>
-
-
-            <div class="form-select">
-                <label for="check" class="col-sm-4 col-form-label" >Busqueda por Aerolinea:</label>
-                <div class="col-sm-8">
-                    <select name="" id="aero">
-
-                    </select>
-                </div>
-            </div>
-            <div class="form-select">
-                <label for="check" class="col-sm-4 col-form-label" >Busqueda por Pais:</label>
-                <div class="col-sm-8">
-                    <select name="" id="country">
-
-                    </select>
-                </div>
-            </div>
+        <section class="page-section-mini bg-gray" id="search">
+            
         </section>
 
         <!-- Target para Tablas Dinamicas-->
 
         <section class="page-section" id="displaytablas">
 
+            <table class="table">
+                <thead>
+                    <th style="text-align: center;">Codigo de Vuelo</th>
+                    <th style="text-align: center;">Agencia</th>
+                    <th style="text-align: center;">Pais</th>
+                    <th style="text-align: center;">Fecha</th>
+                    <th style="text-align: center;">Hora</th>
+                    <th style="text-align: center;">Estado</th>
+                    <th style="text-align: center;">Puerta</th>
+                    <th style="text-align: center;">Precio</th>
+                    <th></th>
+                </thead>
+                <tbody id="flightList" style="text-align: center;">
 
-
-
-
-
-
-
+                </tbody>
+            </table>
             </section>
 
         
@@ -136,8 +127,11 @@
                 document.getElementById('userNav').innerHTML = '';
                 document.getElementById('userNav').innerHTML = `
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">Vuelos</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#team">Sobre Nosotros</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/html/seeVuelos.html">Vuelos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Reservas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Compras</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/html/carrito.html">Carrito</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" value="${localStorage.getItem("User")}">${localStorage.getItem("User")}</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" onclick="logout()">LogOut</a></li>
                 `;
@@ -150,12 +144,104 @@
 
         </script>
 
+        <script>
+            let flightList = [];
+            let info2 = [];
+            let existflight2 = [];
+            let specificflight2 = [];
+
+            let info3 = [];
+    let existflight3 = [];
+    let specificflight3 = [];
+            
+                    const getSalidasArribo = async ()=>{
+        flightList = document.querySelector('#flightList');
+        flightList.innerHTML = '';
+        existflight2 = await fetch('http://localhost:50498/api/VuelosSArribo').then(response => response.json());
+        var length = Object.keys(existflight2).length;
+        for (let index = 0; index < length; index++) {
+            info2 = await fetch('http://localhost:50498/api/VuelosSArribo/'+index).then(response => response.json());
+            specificflight2[index] = info2;
+        }
+        flightList.innerHTML = specificflight2.map(e=>{
+            return `
+            <tr>
+            <td style="text-align: center;">${e.Codigo_Vuelo}</td>
+                            <td style="text-align: center;">${e.Aerolinea}</td>
+                            <td style="text-align: center;">${e.Cod_Pais_FK}</td>
+                            <td style="text-align: center;">${e.Fecha}</td>
+                            <td style="text-align: center;">${e.Hora}</td>
+                            <td style="text-align: center;">${e.Estado}</td>
+                            <td style="text-align: center;">${e.Cod_Puerta_FK}</td>
+                            <td style="text-align: center;">N/A</td>
+            </tr>`
+        })
+        search = document.querySelector('#search');
+        search.innerHTML = `
+        <div class="masthead-subheading">Filtrar: </div>
+            <button class="btn btn-primary" onclick="window.location.href = 'seeVuelos.html'">Volver</button>
+        `;
+    }
+
+    const getLlegadasArribo = async ()=>{
+        flightList = document.querySelector('#flightList');
+        flightList.innerHTML = '';
+        existflight3 = await fetch('http://localhost:50498/api/VuelosYArribo').then(response => response.json());
+        var length = Object.keys(existflight3).length;
+        for (let index = 0; index < length; index++) {
+            info3 = await fetch('http://localhost:50498/api/VuelosYArribo/'+index).then(response => response.json());
+            specificflight3[index] = info3;
+        }
+        flightList.innerHTML = specificflight3.map(e=>{
+            return `
+            <tr>
+            <td style="text-align: center;">${e.Codigo_Vuelo}</td>
+                            <td style="text-align: center;">${e.Aerolinea}</td>
+                            <td style="text-align: center;">${e.Cod_Pais_FK}</td>
+                            <td style="text-align: center;">${e.Fecha}</td>
+                            <td style="text-align: center;">${e.Hora}</td>
+                            <td style="text-align: center;">${e.Estado}</td>
+                            <td style="text-align: center;">${e.Cod_Puerta_FK}</td>
+                            <td style="text-align: center;">N/A</td>
+            </tr>`
+        })
+        search = document.querySelector('#search');
+        search.innerHTML = `
+        <div class="masthead-subheading">Filtrar: </div>
+        <button class="btn btn-primary" onclick="window.location.href = 'seeVuelos.html'">Volver</button>
+        `;
+    }
+
+        const addCart = async (codigo, pais, precio)=>{
+            if(localStorage.getItem('User') == null){
+                alert('Debe estar ingresado como usuario para añadir a carrito y comprar o reservar.\nSera direccionad@ al login o registro.')
+                window.location.href = 'http://192.168.56.1:5500/index.html#logInReg';
+            }else{
+                /* INSERT INTO CART */
+                     var sendFilter = await fetch('http://localhost:50498/api/Carrito',{
+                          method:'POST',
+                         headers:{
+                                 'Content-Type':'application/json'
+                              },
+                         body:JSON.stringify({
+                            Codigo_Vuelo: codigo,
+                            Pais: pais,
+                            Precio: precio
+                         })
+                     })
+                     alert('Agregado al carrito!');
+
+        
+            }
+        }
+        </script>
+
 
         <!-- Core theme JS-->
         <script src="../js/scripts.js"></script>
 
         <script>
-            const cap = function(){
+            /*const cap = function(){
             var caracteres = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V'
             ,'W','X','Y','Z','1','2','3','4','5','6','7','8','9','0','a','b','c','d','e','f','g','h','i',
             'j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z', '!','@','#','$','%','^','&','*','+']
@@ -169,12 +255,12 @@
                  var final = a+b+c+d+e+f;
                  document.getElementById("capt").value=final;
             }
-            cap();
+            cap(); */
         </script>
 
         <!--Log In JS-->
-        <script src="../js/login.js"></script>
-
+       <!-- <script src="../js/login.js"></script>-->
+        <script src="../js/seeVuelos.js"></script>
         
         
     </body>

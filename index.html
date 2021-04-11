@@ -28,7 +28,8 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ml-auto" id="userNav">
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">Vuelos</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">Vuelos Destacados</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/html/seeVuelos.html">Vuelos</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#team">Sobre Nosotros</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#logInReg">Login</a></li>
                     </ul>
@@ -581,8 +582,11 @@
                 document.getElementById('userNav').innerHTML = '';
                 document.getElementById('userNav').innerHTML = `
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">Vuelos</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#team">Sobre Nosotros</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/html/seeVuelos.html">Vuelos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Reservas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Compras</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/html/carrito.html">Carrito</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" value="${localStorage.getItem("User")}">${localStorage.getItem("User")}</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" onclick="logout()">LogOut</a></li>
                 `;
