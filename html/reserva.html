@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>V-Vuelos ULACIT</title>
+        <link rel="icon" type="image/x-icon" href="../assets/img/favicon.png" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="../css/styles.css" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="../assets/img/favicon.png" /></a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars ml-1"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav text-uppercase ml-auto" id="userNav">
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">Explorar Vuelos</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#team">Sobre Nosotros</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#logInReg">Login</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Masthead-->
+        <header class="masthead">
+            <div class="container" >
+
+                <div class="masthead-heading text-uppercase">CheckOut</div>
+
+                <div class="masthead-subheading">Complete los detalles de su reserva: </div>   
+
+                </div>
+        </header>
+
+        <hr>
+
+
+        <div class="card mb-3"style="background-color: #f0f0f5;">
+            <center>
+            <img style="height: 140px; width: 464px;"
+             src="http://www.dusoleil.eu/reservation/images/reservation.png" class="card-img-top" alt="...">
+            <div class="card-body" style="background-color: #f0f0f5;">
+              <h5 class="card-title">Reservas </h5>
+
+              <form>
+     
+
+              
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="inputEmail4">Destino</label>
+                    <input type="text" class="form-control" id="inputEmail4" placeholder="Destino" readonly>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputPassword4">Numero de Tickets</label>
+                    <input type="number" class="form-control" id="inputPassword4" placeholder="Numero de la Tarjeta">
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group col-md-3">
+                    <label for="inputCity">Año de Exp</label>
+                    
+                    
+                                <div class="col-sm">
+                                    <!--<input type="number" class="" style="width: 100%;" placeholder="YYYY" min="1950" max="2025"  name="rol" id="iniAno">-->
+                                    <select name="rol" id="iniAno" class="form-control">
+                                        <option value="" selected>YYYY</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2023">2023</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2025">2025</option>
+                                        <option value="2026">2026</option>
+
+                                    </select>
+                                </div>
+                            
+                    
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="inputCity">Mes de Exp</label>
+        
+                                <div class="col-sm">
+                                    <!--<input type="number" class="" style="width: 100%;" placeholder="MM" min="1" max="12"  name="rol" id="iniMes">-->
+                                    <select name="rol" id="iniMes" class="form-control">
+                                        <option value="" selected>MM</option>
+                                        <option value="01">01</option>
+                                        <option value="02">02</option>
+                                        <option value="03">03</option>
+                                        <option value="04">04</option>
+                                        <option value="05">05</option>
+                                        <option value="06">06</option>
+                                        <option value="07">07</option>
+                                        <option value="08">08</option>
+                                        <option value="09">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                    </select>
+                                </div>
+                                
+                    
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="inputState">Proovedor de Tarjeta</label>
+                    <select id="inputState" class="form-control">
+                      <option selected>Elegir...</option>
+                      <option value="V">Visa </option>
+                      <option value="MC">Master Card</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="inputZip">CCV</label>
+                    <input type="number" class="form-control" id="inputZip">
+                  </div>
+                </div>
+                <class class="form-group">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="Checkcard">
+                    <label class="form-check-label" for="gridCheck">
+                      Acepto los terminos y condiciones.
+                    </label>
+                  </div>
+<hr>
+
+                  <div class="col-sm-2" style="text-align: center;">
+                    <div>
+                        <div class="form-group row">
+                            <h4  class="col-sm-4 col-form-label" >Subtotal:</h4>
+                            <input class="inputLabel2 col-sm-4 col-form-label" id="Subtotal" readonly >
+                            </div>
+        
+        
+        
+                            <div class="form-group row">
+                                <h4  class="col-sm-4 col-form-label" >IVA:</h4>
+                                <input class="inputLabel2 col-sm-4 col-form-label" id="Tax" readonly>
+                                </div>
+                                <div class="form-group row">
+                                    <h4  class="col-sm-4 col-form-label" >Total:</h4>
+                                    <input class="inputLabel2 col-sm-4 col-form-label" id="Total" readonly>
+                                </div>
+        
+                      </div>
+                    </div>
+
+
+
+
+                </class>
+                <br>
+                <center>
+                
+                <button type="submit" class="btn btn-success" style="height: 100px; width: 900px;">Realizar Reserva</button>
+            </center>
+              </form>
+            </div>
+          </div>
+        </center>
+
+
+            
+        
+
+
+        
+<footer class="footer py-4">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-4 text-lg-left">Copyright V-Vuelos 2021</div>
+                    <div class="col-lg-4 my-3 my-lg-0">
+                        <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    <div class="col-lg-4 text-lg-right">
+                        <a class="mr-3" href="#!">Privacy Policy</a>
+                        <a href="#!">Terms of Use</a>
+                    </div>
+                </div>
+            </div>
+</footer>
+        
+
+        
+
+        <!-- Bootstrap core JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        
+        
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+        <!-- Third party plugin JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+        <!-- Contact form JS-->
+        <script src="assets/mail/jqBootstrapValidation.js"></script>
+        <script src="assets/mail/contact_me.js"></script>
+
+        <script>
+            if(localStorage.getItem("User") != null){
+                document.getElementById('userNav').innerHTML = '';
+                document.getElementById('userNav').innerHTML = `
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">Vuelos</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#team">Sobre Nosotros</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" value="${localStorage.getItem("User")}">${localStorage.getItem("User")}</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" onclick="logout()">LogOut</a></li>
+                `;
+            }
+            const logout = function(){
+                localStorage.removeItem("User");
+                localStorage.removeItem("Rol");
+                window.location.href = "../index.html";
+            }
+
+        </script>
+
+
+        <!-- Core theme JS-->
+        <script src="../js/scripts.js"></script>
+
+        <script>
+            const cap = function(){
+            var caracteres = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V'
+            ,'W','X','Y','Z','1','2','3','4','5','6','7','8','9','0','a','b','c','d','e','f','g','h','i',
+            'j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z', '!','@','#','$','%','^','&','*','+']
+                 var a = caracteres[Math.floor(Math.random()*71)];
+                 var b = caracteres[Math.floor(Math.random()*71)];
+                 var c = caracteres[Math.floor(Math.random()*71)];
+                 var d = caracteres[Math.floor(Math.random()*71)];
+                 var e = caracteres[Math.floor(Math.random()*71)];
+                 var f = caracteres[Math.floor(Math.random()*71)];
+
+                 var final = a+b+c+d+e+f;
+                 document.getElementById("capt").value=final;
+            }
+            cap();
+        </script>
+
+        <!--Log In JS-->
+        <script src="../js/checkout.js"></script>
+
+        
+        
+    </body>
+</html>
