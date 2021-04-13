@@ -75,8 +75,9 @@
             </tbody>
         </table>
 
-
-              
+        <center>
+        <button class="btn btn-primary" style="visibility: hidden;" id="backFromDetails" onclick="window.location.href = 'historialcompra.html'">Volver</button>
+    </center>
 
               
             </div>
@@ -126,16 +127,28 @@
             if(localStorage.getItem("User") != null){
                 document.getElementById('userNav').innerHTML = '';
                 document.getElementById('userNav').innerHTML = `
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">Vuelos</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#team">Sobre Nosotros</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="../index.html#services">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="../index.html#team">Sobre Nosotros</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/html/seeVuelos.html">Vuelos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/html/historialreservas.html">Reservas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/html/historialcompra.html">Compras</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/html/carrito.html">Carrito</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" value="${localStorage.getItem("User")}">${localStorage.getItem("User")}</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" onclick="logout()">LogOut</a></li>
                 `;
             }
-            const logout = function(){
+            const logout = async function(){
                 localStorage.removeItem("User");
                 localStorage.removeItem("Rol");
+                var cartClean = await fetch('http://localhost:50498/api/logoutOrBuy/0',{
+            method:'DELETE',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+
+            })
+        }) 
                 window.location.href = "../index.html";
             }
 
@@ -163,10 +176,11 @@
          let exBuy2 = [];
         let SpecificBuy2 = [];
 
-        document.querySelector('#historialcomprastable').style.visibility = "hidden";
-        document.querySelector('#table1').style.visibility = "hidden";
+        document.querySelector('#historialcomprastable').style.display = "none";
+        document.querySelector('#table1').style.display = "none";
         historialcomprastableDetails = document.querySelector('#historialcomprastableDetails').style.visibility = "visible";
         table2 = document.querySelector('#table2').style.visibility = "visible";
+        document.querySelector('#backFromDetails').style.visibility = "visible";
 
         const getMyNiceDetail = async () =>{
             historialcomprastableDetails = document.querySelector('#historialcomprastableDetails');

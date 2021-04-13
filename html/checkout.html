@@ -208,20 +208,27 @@
                   <div class="form-row">
                     <div class="form-group col-md-6">
                       <label for="inputEmail4">Numero de Cuenta</label>
-                      <input type="number" class="form-control" id="inputEmail4" placeholder="Numero de Cuenta">
+                      <input type="number" class="form-control" id="numcuenta" placeholder="Numero de Cuenta">
                     </div>
                     <div class="form-group col-md-6">
                       <label for="inputPassword4">Codigo de Seguridad</label>
-                      <input type="number" class="form-control" id="inputPassword4" placeholder="Codigo de Seguridad">
+                      <input type="number" class="form-control" id="codseguridad" placeholder="Codigo de Seguridad">
                     </div>
                   </div>
   
                   
                     <div class="form-group col-md-2">
                       <label for="inputZip">Contraseña</label>
-                      <input type="password" class="form-control" id="inputZip">
+                      <input type="password" class="form-control" id="cuentapass">
+                    </div>
+
+                    <div class="form-group col-md-3">
+                      <label for="inputPassword4">Cantidad de Boletos</label>
+                      <input type="number" class="form-control" min="1" max="5" id="cantidad2" placeholder="Cantidad" value="1" onchange="loadAmounts2()">
                     </div>
                   </div>
+
+                  
                   <class class="form-group">
                   <!--  <div class="form-check">
                       <input class="form-check-input" type="checkbox" id="Check-easypay">
@@ -235,18 +242,18 @@
                       <div>
                           <div class="form-group row">
                               <h4  class="col-sm-4 col-form-label" >Subtotal:</h4>
-                              <input class="inputLabel2 col-sm-4 col-form-label" id="Subtotal" readonly >
+                              <input class="inputLabel2 col-sm-4 col-form-label" id="Subtotal2" readonly >
                               </div>
           
           
           
                               <div class="form-group row">
                                   <h4  class="col-sm-4 col-form-label" >IVA:</h4>
-                                  <input class="inputLabel2 col-sm-4 col-form-label" id="Tax" readonly>
+                                  <input class="inputLabel2 col-sm-4 col-form-label" id="Tax2" readonly>
                                   </div>
                                   <div class="form-group row">
                                       <h4  class="col-sm-4 col-form-label" >Total:</h4>
-                                      <input class="inputLabel2 col-sm-4 col-form-label" id="Total" readonly>
+                                      <input class="inputLabel2 col-sm-4 col-form-label" id="Total2" readonly>
                                   </div>
           
                         </div>
@@ -309,15 +316,27 @@
           let Subtotal = {};
           let Tax = {};
           let Total = {};
+          let Subtotal2 = {};
+          let Tax2 = {};
+          let Total2 = {};
           let cantidad = {};
+          let cantidad2 = {};
           Subtotal = document.querySelector('#Subtotal');
           Tax = document.querySelector('#Tax');
           Total = document.querySelector('#Total');
           cantidad = document.querySelector('#cantidad');
+          cantidad2 = document.querySelector('#cantidad2');
+          Subtotal2 = document.querySelector('#Subtotal2');
+          Tax2 = document.querySelector('#Tax2');
+          Total2 = document.querySelector('#Total2');
 
           Subtotal.value = 0*cantidad.value;
           Tax.value = Subtotal.value*0.13;
           Total.value = Subtotal.value + Tax.value;
+
+          Subtotal2.value = 0*cantidad2.value;
+          Tax2.value = Subtotal2.value*0.13;
+          Total2.value = Subtotal2.value + Tax2.value;
 
           let specefic = [];
           let info = [];
@@ -340,8 +359,26 @@
                 Total.value = parseFloat(Subtotal.value) + parseFloat(Tax.value);
             }
 
-            loadAmounts();
+            const loadAmounts2 = async () =>{
+              Subtotal2.value = 0*cantidad2.value;
+              Tax2.value = Subtotal2.value*0.13;
+              Total2.value = Subtotal2.value + Tax2.value;
+              var getTotalPrice = await fetch('http://localhost:50498/api/Carrito').then(response => response.json());
+              existing = await fetch('http://localhost:50498/api/Carrito').then(response => response.json());
+              var length = Object.keys(existing).length;
+              for (let index = 0; index < length; index++) {
+                  info = await fetch('http://localhost:50498/api/Carrito/'+index).then(response => response.json());
+                  Subtotal2.value = parseFloat(Subtotal2.value) + parseFloat(info.Precio);
+                  Tax2.value = (parseFloat(Subtotal2.value)*0.13);
+                  Total2.value = parseFloat(Subtotal2.value) + parseFloat(Tax2.value);
+                }
+                Subtotal2.value = parseFloat(Subtotal2.value)*cantidad2.value;
+                Tax2.value = Subtotal2.value*0.13;
+                Total2.value = parseFloat(Subtotal2.value) + parseFloat(Tax2.value);
+            }
 
+            loadAmounts();
+            loadAmounts2();
           
 
          /* 
@@ -363,16 +400,28 @@
             if(localStorage.getItem("User") != null){
                 document.getElementById('userNav').innerHTML = '';
                 document.getElementById('userNav').innerHTML = `
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">Vuelos</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#team">Sobre Nosotros</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="../index.html#services">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="../index.html#team">Sobre Nosotros</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/html/seeVuelos.html">Vuelos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/html/historialreservas.html">Reservas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/html/historialcompra.html">Compras</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/html/carrito.html">Carrito</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" value="${localStorage.getItem("User")}">${localStorage.getItem("User")}</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" onclick="logout()">LogOut</a></li>
                 `;
             }
-            const logout = function(){
+            const logout = async function(){
                 localStorage.removeItem("User");
                 localStorage.removeItem("Rol");
+                var cartClean = await fetch('http://localhost:50498/api/logoutOrBuy/0',{
+            method:'DELETE',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+
+            })
+        }) 
                 window.location.href = "../index.html";
             }
 

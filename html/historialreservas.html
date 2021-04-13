@@ -109,16 +109,28 @@
             if(localStorage.getItem("User") != null){
                 document.getElementById('userNav').innerHTML = '';
                 document.getElementById('userNav').innerHTML = `
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">Vuelos</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#team">Sobre Nosotros</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="../index.html#services">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="../index.html#team">Sobre Nosotros</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/html/seeVuelos.html">Vuelos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/html/historialreservas.html">Reservas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/html/historialcompra.html">Compras</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/html/carrito.html">Carrito</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" value="${localStorage.getItem("User")}">${localStorage.getItem("User")}</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" onclick="logout()">LogOut</a></li>
                 `;
             }
-            const logout = function(){
+            const logout = async function(){
                 localStorage.removeItem("User");
                 localStorage.removeItem("Rol");
+                var cartClean = await fetch('http://localhost:50498/api/logoutOrBuy/0',{
+            method:'DELETE',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+
+            })
+        }) 
                 window.location.href = "../index.html";
             }
 
