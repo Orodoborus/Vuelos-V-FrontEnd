@@ -63,80 +63,27 @@
               
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="inputEmail4">Destino</label>
-                    <input type="text" class="form-control" id="inputEmail4" placeholder="Destino" readonly>
+                    <label for="inputEmail4">Destino/s</label>
+                    <input type="text" class="form-control" id="destiny" placeholder="Destino" readonly>
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="inputPassword4">Numero de Tickets</label>
-                    <input type="number" class="form-control" id="inputPassword4" placeholder="Numero de la Tarjeta">
+                    <label for="inputState">Metodo de Pago</label>
+                    <select id="paymentmethod" class="form-control">
+                      <option value="" selected>Elegir...</option>
+                      <option value="Card">Debito/Credito</option>
+                      <option value="EasyPay">EasyPay</option>
+                    </select>
+                    
                   </div>
                 </div>
-
-                <div class="form-row">
-                  <div class="form-group col-md-3">
-                    <label for="inputCity">Año de Exp</label>
-                    
-                    
-                                <div class="col-sm">
-                                    <!--<input type="number" class="" style="width: 100%;" placeholder="YYYY" min="1950" max="2025"  name="rol" id="iniAno">-->
-                                    <select name="rol" id="iniAno" class="form-control">
-                                        <option value="" selected>YYYY</option>
-                                        <option value="2021">2021</option>
-                                        <option value="2022">2022</option>
-                                        <option value="2023">2023</option>
-                                        <option value="2024">2024</option>
-                                        <option value="2025">2025</option>
-                                        <option value="2026">2026</option>
-
-                                    </select>
-                                </div>
-                            
-                    
-                  </div>
-                  <div class="form-group col-md-3">
-                    <label for="inputCity">Mes de Exp</label>
-        
-                                <div class="col-sm">
-                                    <!--<input type="number" class="" style="width: 100%;" placeholder="MM" min="1" max="12"  name="rol" id="iniMes">-->
-                                    <select name="rol" id="iniMes" class="form-control">
-                                        <option value="" selected>MM</option>
-                                        <option value="01">01</option>
-                                        <option value="02">02</option>
-                                        <option value="03">03</option>
-                                        <option value="04">04</option>
-                                        <option value="05">05</option>
-                                        <option value="06">06</option>
-                                        <option value="07">07</option>
-                                        <option value="08">08</option>
-                                        <option value="09">09</option>
-                                        <option value="10">10</option>
-                                        <option value="11">11</option>
-                                        <option value="12">12</option>
-                                    </select>
-                                </div>
-                                
-                    
-                  </div>
+                  <div>
                   <div class="form-group col-md-4">
-                    <label for="inputState">Proovedor de Tarjeta</label>
-                    <select id="inputState" class="form-control">
-                      <option selected>Elegir...</option>
-                      <option value="V">Visa </option>
-                      <option value="MC">Master Card</option>
-                    </select>
-                  </div>
-                  <div class="form-group col-md-2">
-                    <label for="inputZip">CCV</label>
-                    <input type="number" class="form-control" id="inputZip">
+                    <label for="inputPassword4">Numero de Boletos</label>
+                    <input type="number" class="form-control" id="cantidad" placeholder="Numero de la Boletos" value="1" min="1" max="5" onchange="loadAmounts()">
                   </div>
                 </div>
                 <class class="form-group">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="Checkcard">
-                    <label class="form-check-label" for="gridCheck">
-                      Acepto los terminos y condiciones.
-                    </label>
-                  </div>
+                  
 <hr>
 
                   <div class="col-sm-2" style="text-align: center;">
@@ -160,14 +107,14 @@
                       </div>
                     </div>
 
-
+                    <label for="">Recuerda estar 3 horas antes para pagar la reservacion.</label>
 
 
                 </class>
                 <br>
                 <center>
                 
-                <button type="submit" class="btn btn-success" style="height: 100px; width: 900px;">Realizar Reserva</button>
+                <button type="button" class="btn btn-success" id="process" style="height: 100px; width: 900px;">Realizar Reserva</button>
             </center>
               </form>
             </div>
@@ -249,6 +196,44 @@
         <script src="../js/scripts.js"></script>
 
         <script>
+          let Subtotal = {};
+          let Tax = {};
+          let Total = {};
+          let Subtotal2 = {};
+
+          Subtotal = document.querySelector('#Subtotal');
+          Tax = document.querySelector('#Tax');
+          Total = document.querySelector('#Total');
+          cantidad = document.querySelector('#cantidad');
+
+          Subtotal.value = 0*cantidad.value;
+          Tax.value = Subtotal.value*0.13;
+          Total.value = Subtotal.value + Tax.value;
+
+          let specefic = [];
+          let info = [];
+          let existing =[];
+            const loadAmounts = async () =>{
+              Subtotal.value = 0*cantidad.value;
+              Tax.value = Subtotal.value*0.13;
+              Total.value = Subtotal.value + Tax.value;
+              var getTotalPrice = await fetch('http://localhost:50498/api/Carrito').then(response => response.json());
+              existing = await fetch('http://localhost:50498/api/Carrito').then(response => response.json());
+              var length = Object.keys(existing).length;
+              for (let index = 0; index < length; index++) {
+                  info = await fetch('http://localhost:50498/api/Carrito/'+index).then(response => response.json());
+                  Subtotal.value = parseFloat(Subtotal.value) + parseFloat(info.Precio);
+                  Tax.value = (parseFloat(Subtotal.value)*0.13);
+                  Total.value = parseFloat(Subtotal.value) + parseFloat(Tax.value);
+                }
+                Subtotal.value = parseFloat(Subtotal.value)*cantidad.value;
+                Tax.value = Subtotal.value*0.13;
+                Total.value = parseFloat(Subtotal.value) + parseFloat(Tax.value);
+            }
+            loadAmounts();
+        </script>
+
+        <script>
             const cap = function(){
             var caracteres = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V'
             ,'W','X','Y','Z','1','2','3','4','5','6','7','8','9','0','a','b','c','d','e','f','g','h','i',
@@ -263,11 +248,11 @@
                  var final = a+b+c+d+e+f;
                  document.getElementById("capt").value=final;
             }
-            cap();
+            //cap();
         </script>
 
         <!--Log In JS-->
-        <script src="../js/checkout.js"></script>
+        <script src="../js/reserva.js"></script>
 
         
         

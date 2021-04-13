@@ -49,15 +49,38 @@
 
         <hr>
 
-        <table id="historialcomprastable">
+        <table class="table" id="table1">
+            <thead style="text-align: center;">
+                <th>Codigo de Reserva</th>
+                <th>Numero de Reservacion</th>
+                <th>Booking_ID</th>
+                <th>Cantidad</th>
+                <th>Total</th>
+                <th>Metodo de Pago</th>
+                <th>Fecha de reservacion</th>
+                <th></th>
+            </thead>
+            <tbody id="historialreserva" style="text-align: center;">
 
-
-
-
-
-
+            </tbody>
         </table>
 
+        <table class="table"  id="table2">
+            <thead style="text-align: center;">
+                <th>Codigo</th>
+                <th>Codigo de Vuelo</th>
+                <th>Pais</th>
+                <th>Precio</th>
+                <th></th>
+            </thead>
+            <tbody id="historialcomprastableDetailsReservation" style="text-align: center;">
+
+            </tbody>
+        </table>
+
+        <center>
+            <button class="btn btn-primary" id="backFromDetails" onclick="window.location.href = 'historialreservas.html'">Volver</button>
+        </center>
 
               
 
@@ -136,6 +159,56 @@
 
         </script>
 
+<script>
+    const getMyDetail = async (bookingID,coduser)=>{
+        var getMydetail = await fetch('http://localhost:50498/api/reservationdetails',{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+                Booking_ID: bookingID,
+                Cod_User: coduser
+            })
+    })
+
+            let historialreserva = [];
+        let historialcomprastableDetailsReservation = [];
+         let info2 =[];
+         let exBuy2 = [];
+        let SpecificBuy2 = [];
+        let table2 = [];
+
+        document.querySelector('#historialreserva').style.display = "none";
+        document.querySelector('#table1').style.display = "none";
+        historialcomprastableDetailsReservation = document.querySelector('#historialcomprastableDetailsReservation').style.visibility = "visible";
+        table2 = document.querySelector('#table2').style.visibility = "visible";
+        document.querySelector('#backFromDetails').style.visibility = "visible";
+
+        const getMyNiceDetail = async () =>{
+            historialcomprastableDetailsReservation = document.querySelector('#historialcomprastableDetailsReservation');
+            historialcomprastableDetailsReservation.innerHTML = '';
+        exBuy2 = await fetch('http://localhost:50498/api/reservationdetails').then(response => response.json());
+        var length = Object.keys(exBuy2).length;
+        for (let index = 0; index < length; index++) {
+            info2 = await fetch('http://localhost:50498/api/reservationdetails/'+index).then(response => response.json());
+            SpecificBuy2[index] = info2;
+        }
+        historialcomprastableDetailsReservation.innerHTML = SpecificBuy2.map(e=>{
+            return`
+            <tr>
+                <td>${e.Booking_ID}</td>
+                <td>${e.Cod_Vuelo}</td>
+                <td>${e.Pais}</td>
+                <td>${e.Precio}</td>
+                <td></td>
+            </tr>
+            `
+        });
+        }
+        getMyNiceDetail();
+    }
+</script>
 
         <!-- Core theme JS-->
         <script src="../js/scripts.js"></script>
@@ -155,11 +228,11 @@
                  var final = a+b+c+d+e+f;
                  document.getElementById("capt").value=final;
             }
-            cap();
+            //cap();
         </script>
 
         <!--Log In JS-->
-        <script src="../js/checkout.js"></script>
+        <script src="../js/historialReserva.js"></script>
 
         
         
