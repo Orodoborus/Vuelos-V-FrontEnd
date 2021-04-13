@@ -49,13 +49,30 @@
 
         <hr>
 
-        <table id="historialcomprastable">
+        <table class="table" id="table1">
+            <thead style="text-align: center;">
+                <th>Codigo_Compras</th>
+                <th>Cantidad</th>
+                <th>Total</th>
+                <th>Fecha de Compra</th>
+                <th></th>
+            </thead>
+            <tbody id="historialcomprastable" style="text-align: center;">
 
+            </tbody>
+        </table>
 
+        <table class="table"  id="table2">
+            <thead style="text-align: center;">
+                <th>Codigo de Compra</th>
+                <th>Codigo de Vuelo</th>
+                <th>Pais</th>
+                <th>Precio</th>
+                <th></th>
+            </thead>
+            <tbody id="historialcomprastableDetails" style="text-align: center;">
 
-
-
-
+            </tbody>
         </table>
 
 
@@ -124,12 +141,67 @@
 
         </script>
 
+        <script>
+
+
+     const getMyDetail = async (codBUY, codUSER) =>{
+        var getMydetail = await fetch('http://localhost:50498/api/buyingdetails',{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+                Codigo_Compra: codBUY,
+                Codigo_User: codUSER
+            })
+        })
+         
+
+        let historialcomprastable = [];
+        let historialcomprastableDetails = [];
+         let info2 =[];
+         let exBuy2 = [];
+        let SpecificBuy2 = [];
+
+        document.querySelector('#historialcomprastable').style.visibility = "hidden";
+        document.querySelector('#table1').style.visibility = "hidden";
+        historialcomprastableDetails = document.querySelector('#historialcomprastableDetails').style.visibility = "visible";
+        table2 = document.querySelector('#table2').style.visibility = "visible";
+
+        const getMyNiceDetail = async () =>{
+            historialcomprastableDetails = document.querySelector('#historialcomprastableDetails');
+        historialcomprastable.innerHTML = '';
+        exBuy2 = await fetch('http://localhost:50498/api/buyingdetails').then(response => response.json());
+        var length = Object.keys(exBuy2).length;
+        for (let index = 0; index < length; index++) {
+            info2 = await fetch('http://localhost:50498/api/buyingdetails/'+index).then(response => response.json());
+            SpecificBuy2[index] = info2;
+        }
+        historialcomprastableDetails.innerHTML = SpecificBuy2.map(e=>{
+            return`
+            <tr>
+                <td>${e.Codigo_Compra}</td>
+                <td>${e.Codigo_Vuelo}</td>
+                <td>${e.Pais}</td>
+                <td>${e.Precio}</td>
+                <td></td>
+            </tr>
+            `
+        });
+        }
+
+        getMyNiceDetail();
+
+    }
+        </script>
+
+        <script src="../js/compras.js"></script>
 
         <!-- Core theme JS-->
         <script src="../js/scripts.js"></script>
 
         <script>
-            const cap = function(){
+            /*const cap = function(){
             var caracteres = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V'
             ,'W','X','Y','Z','1','2','3','4','5','6','7','8','9','0','a','b','c','d','e','f','g','h','i',
             'j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z', '!','@','#','$','%','^','&','*','+']
@@ -140,14 +212,14 @@
                  var e = caracteres[Math.floor(Math.random()*71)];
                  var f = caracteres[Math.floor(Math.random()*71)];
 
-                 var final = a+b+c+d+e+f;
-                 document.getElementById("capt").value=final;
-            }
-            cap();
+                 var final = a+b+c+d+e+f; 
+                // document.getElementById("capt").value=final;
+            }*/
+           // cap();
         </script>
 
         <!--Log In JS-->
-        <script src="../js/checkout.js"></script>
+
 
         
         
