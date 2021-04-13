@@ -51,9 +51,6 @@
 
 
         <div class="card mb-3"style="background-color: #f0f0f5
-
-
-
         ;">
             <center>
             <img style="height: 200px; width: 600px;"
@@ -67,35 +64,45 @@
               <form>
 
               <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                <label class="btn btn-primary active">
-                  <input type="radio" name="options" id="debito" autocomplete="off" checked><span class="material-icons">credit_card</span> Debito</label>
+               <!-- <label class="btn btn-primary active">
+                  <input type="radio" name="options" id="debito" autocomplete="off" checked><span class="material-icons">credit_card</span> <button class="btn btn-primary" id="credito">Debito</button> </label>
                 <label class="btn btn-primary">
                   <input type="radio" name="options" id="credito" autocomplete="off">
-                  <span class="material-icons">credit_card</span>  Credito
-                </label>               
+                  <span class="material-icons">credit_card</span> <button class="btn btn-primary" id="debito">Credito</button> 
+                </label>          -->     
               </div>
-              
-
               
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="inputEmail4">Nombre del Tarjetahabiente</label>
-                    <input type="text" class="form-control" id="inputEmail4" placeholder="Nombre del Tarjetahabiente">
-                  </div>
-                  <div class="form-group col-md-6">
                     <label for="inputPassword4">Numero de la Tarjeta</label>
-                    <input type="number" class="form-control" id="inputPassword4" placeholder="Numero de la Tarjeta">
+                    <input type="number" class="form-control" id="numcard" placeholder="Numero de la Tarjeta">
                   </div>
+
+                  <div class="form-group col-md-3">
+                    <label for="inputPassword4">Tipo de tarjeta</label>
+                    <select name="type" id="cardtypeDC" class="form-control">
+                      <option value="">Seleccione un tipo de tarjeta</option>
+                      <option value="Debito">Debito</option>
+                      <option value="Credito">Credito</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="inputPassword4">Cantidad de Boletos</label>
+                    <input type="number" class="form-control" min="1" max="5" id="cantidad" placeholder="Cantidad" value="1" onchange="loadAmounts()">
+                  </div>
+
                 </div>
+
+                
 
                 <div class="form-row">
                   <div class="form-group col-md-3">
-                    <label for="inputCity">Año de Exp</label>
+                    <label for="anoexp">Año de Exp</label>
                     
                     
                                 <div class="col-sm">
                                     <!--<input type="number" class="" style="width: 100%;" placeholder="YYYY" min="1950" max="2025"  name="rol" id="iniAno">-->
-                                    <select name="rol" id="iniAno" class="form-control">
+                                    <select name="rol" id="anoexp" class="form-control">
                                         <option value="" selected>YYYY</option>
                                         <option value="2021">2021</option>
                                         <option value="2022">2022</option>
@@ -110,11 +117,11 @@
                     
                   </div>
                   <div class="form-group col-md-3">
-                    <label for="inputCity">Mes de Exp</label>
+                    <label for="mesexp">Mes de Exp</label>
         
                                 <div class="col-sm">
                                     <!--<input type="number" class="" style="width: 100%;" placeholder="MM" min="1" max="12"  name="rol" id="iniMes">-->
-                                    <select name="rol" id="iniMes" class="form-control">
+                                    <select name="rol" id="mesexp" class="form-control">
                                         <option value="" selected>MM</option>
                                         <option value="01">01</option>
                                         <option value="02">02</option>
@@ -135,7 +142,7 @@
                   </div>
                   <div class="form-group col-md-4">
                     <label for="inputState">Proovedor de Tarjeta</label>
-                    <select id="inputState" class="form-control">
+                    <select id="cardtype" class="form-control">
                       <option selected>Elegir...</option>
                       <option value="V">Visa </option>
                       <option value="MC">Master Card</option>
@@ -143,16 +150,16 @@
                   </div>
                   <div class="form-group col-md-2">
                     <label for="inputZip">CCV</label>
-                    <input type="number" class="form-control" id="inputZip">
+                    <input type="number" class="form-control" id="cvv">
                   </div>
                 </div>
                 <class class="form-group">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="Checkcard">
+                 <!-- <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="checkTerms">
                     <label class="form-check-label" for="gridCheck">
                       Acepto los terminos y condiciones.
                     </label>
-                  </div>
+                  </div> -->
 <hr>
 
                   <div class="col-sm-2" style="text-align: center;">
@@ -183,7 +190,7 @@
                 <br>
                 <center>
                 
-                <button type="submit" class="btn btn-success" style="height: 100px; width: 900px;">Realizar Compra</button>
+                <button type="button" class="btn btn-success" style="height: 100px; width: 900px;" id="process">Realizar Compra</button>
             </center>
               </form>
             </div>
@@ -216,12 +223,12 @@
                     </div>
                   </div>
                   <class class="form-group">
-                    <div class="form-check">
+                  <!--  <div class="form-check">
                       <input class="form-check-input" type="checkbox" id="Check-easypay">
                       <label class="form-check-label" for="gridCheck">
                         Acepto los terminos y condiciones.
                       </label>
-                    </div>
+                    </div> -->
   <hr>
   
                     <div class="col-sm-2" style="text-align: center;">
@@ -252,7 +259,7 @@
                   <br>
                   <center>
                   
-                  <button type="submit" class="btn btn-success" style="height: 100px; width: 900px;">Realizar Compra</button>
+                  <button type="button" class="btn btn-success" style="height: 100px; width: 900px;" id="process2">Realizar Compra</button>
               </center>
               <br>
                 </form>              
@@ -299,6 +306,60 @@
         <script src="assets/mail/contact_me.js"></script>
 
         <script>
+          let Subtotal = {};
+          let Tax = {};
+          let Total = {};
+          let cantidad = {};
+          Subtotal = document.querySelector('#Subtotal');
+          Tax = document.querySelector('#Tax');
+          Total = document.querySelector('#Total');
+          cantidad = document.querySelector('#cantidad');
+
+          Subtotal.value = 0*cantidad.value;
+          Tax.value = Subtotal.value*0.13;
+          Total.value = Subtotal.value + Tax.value;
+
+          let specefic = [];
+          let info = [];
+          let existing =[];
+            const loadAmounts = async () =>{
+              Subtotal.value = 0*cantidad.value;
+              Tax.value = Subtotal.value*0.13;
+              Total.value = Subtotal.value + Tax.value;
+              var getTotalPrice = await fetch('http://localhost:50498/api/Carrito').then(response => response.json());
+              existing = await fetch('http://localhost:50498/api/Carrito').then(response => response.json());
+              var length = Object.keys(existing).length;
+              for (let index = 0; index < length; index++) {
+                  info = await fetch('http://localhost:50498/api/Carrito/'+index).then(response => response.json());
+                  Subtotal.value = parseFloat(Subtotal.value) + parseFloat(info.Precio);
+                  Tax.value = (parseFloat(Subtotal.value)*0.13);
+                  Total.value = parseFloat(Subtotal.value) + parseFloat(Tax.value);
+                }
+                Subtotal.value = parseFloat(Subtotal.value)*cantidad.value;
+                Tax.value = Subtotal.value*0.13;
+                Total.value = parseFloat(Subtotal.value) + parseFloat(Tax.value);
+            }
+
+            loadAmounts();
+
+          
+
+         /* 
+
+            const loadAmounts = async () =>{
+              var getTotalPrice = await fetch('http://localhost:50498/api/Carrito').then(response => response.json());
+              existing = await fetch('http://localhost:50498/api/Carrito').then(response => response.json());
+              var length = Object.keys(existing).length;
+              for (let index = 0; index < length; index++) {
+                  info = await fetch('http://localhost:50498/api/Carrito/'+index).then(response => response.json());
+                  Subtotal.value = parseFloat(Subtotal.value) + parseFloat(info.Precio);
+                  Tax.value = (parseFloat(Subtotal.value)*0.13);
+                  Total.value = Subtotal.value + Tax.value;
+                }
+            } */
+        </script>
+
+        <script>
             if(localStorage.getItem("User") != null){
                 document.getElementById('userNav').innerHTML = '';
                 document.getElementById('userNav').innerHTML = `
@@ -334,9 +395,9 @@
                  var f = caracteres[Math.floor(Math.random()*71)];
 
                  var final = a+b+c+d+e+f;
-                 document.getElementById("capt").value=final;
+                // document.getElementById("capt").value=final;
             }
-            cap();
+            //cap();
         </script>
 
         <!--Log In JS-->
