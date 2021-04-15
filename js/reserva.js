@@ -20,6 +20,9 @@
     let consEx = [];
     let infoCons = [];
 
+    let consEx2 = [];
+    let infoCons2 = [];
+
     const ini = ()=>{
         destiny = document.querySelector('#destiny');
         cantidad = document.querySelector('#cantidad');
@@ -63,7 +66,7 @@
                 'Content-Type':'application/json'
             },
             body:JSON.stringify({
-                Cod_Reserva: infoCons.Prefijo+infoCons.Valor,
+                Cod_Reserva: infoCons2.Prefijo+infoCons2.Valor,
                 Numero_Reservacion: resNumber,
                 Booking_ID: final,
                 Cod_User_FK: localStorage.getItem('User'),
@@ -80,6 +83,7 @@
         getCons();
         cartex = await fetch('http://localhost:50498/api/Carrito').then(response => response.json());
         var length = Object.keys(cartex).length;
+        console.log(length);
         for (let index = 0; index < length; index++) {
             infoCart = await fetch('http://localhost:50498/api/Carrito/'+index).then(response => response.json());
             var buying_details = await fetch('http://localhost:50498/api/newreservationdetail',{
@@ -88,7 +92,7 @@
                     'Content-Type':'application/json'
                 },
                 body:JSON.stringify({
-                    Booking_ID: infoCons.Prefijo+infoCons.Valor,
+                    Booking_ID: infoCons2.Prefijo+infoCons2.Valor,
                     Cod_User: localStorage.getItem('User'),
                     Cod_Vuelo: infoCart.Codigo_Vuelo,
                     Pais: infoCart.Pais,
@@ -135,12 +139,14 @@
                     }else{
                         if(infoCons.Descripcion == "Reservaciones de Boletos"){
                             result = infoCons.Prefijo+infoCons.Valor;
+                            infoCons2 = infoCons;
                             break;
                         }
                     }
                 }else{
                     if(infoCons.Descripcion == "Reservaciones de Boletos"){
                         result = infoCons.Prefijo+infoCons.Valor;
+                        infoCons2 = infoCons;
                         break;
                     }
                 }
